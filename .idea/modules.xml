@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PTS2.iml" filepath="$PROJECT_DIR$/PTS2.iml" group="PTS2" />
+      <module fileurl="file://$PROJECT_DIR$/app/PTS2-app.iml" filepath="$PROJECT_DIR$/app/PTS2-app.iml" group="PTS2/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="PTS2/app" />
     </modules>
   </component>
