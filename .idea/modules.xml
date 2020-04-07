@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PTS2.iml" filepath="$PROJECT_DIR$/PTS2.iml" group="PTS2" />
-      <module fileurl="file://$PROJECT_DIR$/app/PTS2-app.iml" filepath="$PROJECT_DIR$/app/PTS2-app.iml" group="PTS2/app" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="PTS2/app" />
+      <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" group="pts2/android" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" group="pts2/core" />
+      <module fileurl="file://$PROJECT_DIR$/desktop/desktop.iml" filepath="$PROJECT_DIR$/desktop/desktop.iml" group="pts2/desktop" />
+      <module fileurl="file://$PROJECT_DIR$/ios/ios.iml" filepath="$PROJECT_DIR$/ios/ios.iml" group="pts2/ios" />
+      <module fileurl="file://$PROJECT_DIR$/pts2.iml" filepath="$PROJECT_DIR$/pts2.iml" group="pts2" />
     </modules>
   </component>
 </project>
