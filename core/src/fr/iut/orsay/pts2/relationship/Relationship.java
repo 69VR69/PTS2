@@ -52,7 +52,7 @@ public class Relationship
                 
                 if(this.getRelationStep() == 'W') //TODO: create accept conditions (&& military power of foreign ... + troops position...)
                     {
-                        System.out.println("This truce demand is accepted");
+                        System.out.println("This peace demand is accepted");
                         result = true;
                     }
                 
