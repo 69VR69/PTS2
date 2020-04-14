@@ -8,9 +8,15 @@ public abstract class unit {
     protected double dmg;
     protected int range;
 
-    public boolean toAttack() {
+    public int getDistance(unit u1, unit u2){
+        int distance=(x(u1)-x(u2))/(y(u1)-y(u2));
+        return distance;
+    }
+    public boolean toAttack(unit u1, unit u2) {
         boolean isTouched = Gdx.input.isTouched();
-        return isTouched;
+        if(isTouched && getDistance(u1, u2)>=range){
+            u2.setHp(u2.getHp()-u1.getDmg());
+        }
     }
     public void toEvolve() {
         this.setHp(hp * 1.5);
