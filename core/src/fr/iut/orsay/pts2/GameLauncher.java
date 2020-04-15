@@ -4,8 +4,6 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import fr.iut.orsay.pts2.ai.AI;
-
 public class GameLauncher extends ApplicationAdapter
     {
         SpriteBatch batch;
@@ -13,8 +11,8 @@ public class GameLauncher extends ApplicationAdapter
         
         @Override public void create()
             {
-                AI ai = new AI();
-                System.out.println("Result: " + ai.Action());
+                //AI ai = new AI();
+                //System.out.println("Result: " + ai.Action());
             }
         
         @Override public void render()

@@ -1,30 +1,38 @@
 package fr.iut.orsay.pts2;
 
 import java.util.ArrayList;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import fr.iut.orsay.pts2.relationship.Relationship;
 import fr.iut.orsay.pts2.unit.Unit;
 
-public class Civilization
+public abstract class Civilization
     {
         private final String name, description;
-        private ArrayList<Unit> troops;
         private ArrayList<Building> buildings;
         private ArrayList<Relationship> relationships;
-        
-        public Civilization(String name, String description, ArrayList<Unit> troops, ArrayList<Building> buildings, ArrayList<Relationship> relationships)
+        SortedMap<Integer, Unit> units;
+        private int posX, posY;
+        private static int test = 0;
+    
+        public Civilization(String name, String description, Unit unit, ArrayList<Building> buildings, ArrayList<Relationship> relationships)
             {
                 this.name = name;
                 this.description = description;
-                this.troops = troops;
                 this.buildings = buildings;
                 this.relationships = relationships;
+                this.units = new TreeMap<>();
+                this.addUnit(unit);
             }
         
         public void addUnit(Unit... unit)
             {
                 for (Unit u : unit)
-                    this.getTroops().add(u);
+                    {
+                        test++;
+                        this.getUnits().put(u.getNbUnit() + 1, u);
+                    }
             }
         
         public void addBuilding(Building... building)
@@ -38,6 +46,17 @@ public class Civilization
                 for (Relationship r : relationship)
                     this.getRelationships().add(r);
             }
+    
+        public boolean isWar()
+            {
+                boolean result = false;
+                for (Relationship r : this.getRelationships())
+                    {
+                        if (r.getRelationStep() == 'W')
+                            result = true;
+                    }
+                return result;
+            }
         
         
         public String getName()
@@ -49,15 +68,15 @@ public class Civilization
             {
                 return description;
             }
-
-        public ArrayList<Unit> getTroops()
+    
+        public SortedMap<Integer, Unit> getUnits()
             {
-                return troops;
+                return units;
             }
-        
-        public void setTroops(ArrayList<Unit> troops)
+    
+        public void setUnits(SortedMap<Integer, Unit> units)
             {
-                this.troops = troops;
+                this.units = units;
             }
         
         public ArrayList<Building> getBuildings()
@@ -78,5 +97,25 @@ public class Civilization
         public void setRelationships(ArrayList<Relationship> relationships)
             {
                 this.relationships = relationships;
+            }
+    
+        public int getPosX()
+            {
+                return posX;
+            }
+    
+        public void setPosX(int posX)
+            {
+                this.posX = posX;
+            }
+    
+        public int getPosY()
+            {
+                return posY;
+            }
+    
+        public void setPosY(int posY)
+            {
+                this.posY = posY;
             }
     }
