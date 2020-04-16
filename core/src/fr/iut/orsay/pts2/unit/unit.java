@@ -8,13 +8,8 @@ public abstract class unit {
     protected double dmg;
     protected int range;
 
-    public static double getDistance(unit u1, unit u2)
-    {
-        return Math.sqrt((u2.getPosX() - u1.getPosX()) ^ 2 + (u2.getPosY() - u1.getPosY()) ^ 2);
-    }
 
-
-    public boolean toAttack(unit u1, unit u2) {
+    public void toAttack(unit u1, unit u2) {
         boolean isTouched = Gdx.input.isTouched();
         if(isTouched && getDistance(u1, u2)>=range){
             u2.setHp(u2.getHp()-u1.getDmg());
