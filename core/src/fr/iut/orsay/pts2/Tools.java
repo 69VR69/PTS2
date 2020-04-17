@@ -45,6 +45,12 @@ public abstract class Tools
                 return values.get(CONSTANT.RND.nextInt(values.size()));
             }
     
+        public static Civilization chooseBetween(Civilization... civ)
+            {
+                ArrayList<Civilization> values = new ArrayList<>(Arrays.asList(civ));
+                return values.get(CONSTANT.RND.nextInt(values.size()));
+            }
+        
         public static double getDistance(Civilization civ1, Civilization civ2)
             {
                 return Math.sqrt((civ2.getPosX() - civ1.getPosX()) ^ 2 + (civ2.getPosY() - civ1.getPosY()) ^ 2);

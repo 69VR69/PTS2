@@ -1,8 +1,11 @@
 package fr.iut.orsay.pts2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import fr.iut.orsay.pts2.relationship.Relationship;
 import fr.iut.orsay.pts2.unit.Unit;
@@ -12,9 +15,9 @@ public abstract class Civilization
         private final String name, description;
         private ArrayList<Building> buildings;
         private ArrayList<Relationship> relationships;
-        SortedMap<Integer, Unit> units;
+        private ArrayList<Unit> unitList;
+        private SortedMap<String, Integer> unitQuantity;
         private int posX, posY;
-        private static int test = 0;
     
         public Civilization(String name, String description, Unit unit, ArrayList<Building> buildings, ArrayList<Relationship> relationships)
             {
@@ -22,7 +25,8 @@ public abstract class Civilization
                 this.description = description;
                 this.buildings = buildings;
                 this.relationships = relationships;
-                this.units = new TreeMap<>();
+                this.unitQuantity = new TreeMap<>();
+                this.unitList = new ArrayList<>();
                 this.addUnit(unit);
             }
         
@@ -30,9 +34,19 @@ public abstract class Civilization
             {
                 for (Unit u : unit)
                     {
-                        test++;
-                        this.getUnits().put(u.getNbUnit() + 1, u);
+                        if (this.getUnitQuantity().containsKey(u.getName()))
+                            {
+                                this.getUnitQuantity().replace(u.getName(), this.getUnitQuantity().get(u.getName()) + 1);
+                                this.getUnitList().add(u);
+                            }
+                        else
+                            {
+                                this.getUnitQuantity().put(u.getName(), 1);
+                                this.getUnitList().add(u);
+                            }
                     }
+                Collections.sort(this.getUnitList());
+                SortedSet<Integer> values = new TreeSet<>(this.getUnitQuantity().values());
             }
         
         public void addBuilding(Building... building)
@@ -57,7 +71,33 @@ public abstract class Civilization
                     }
                 return result;
             }
-        
+    
+        public ArrayList<Civilization> listCiv()
+            {
+                ArrayList<Civilization> civList = new ArrayList<>();
+                for (Relationship r : this.getRelationships())
+                    {
+                        if (this.getName().equals(r.getCiv1().getName()))
+                            civList.add(r.getCiv2());
+                        else
+                            civList.add(r.getCiv1());
+                    }
+                return civList;
+            }
+    
+        public Unit mostTroop()
+            {
+                Unit result = null;
+                for (Unit u : this.getUnitList())
+                    {
+                        if (u.getName().equals(this.getUnitQuantity().firstKey()))
+                            {
+                                result = u;
+                                break;
+                            }
+                    }
+                return result;
+            }
         
         public String getName()
             {
@@ -69,14 +109,24 @@ public abstract class Civilization
                 return description;
             }
     
-        public SortedMap<Integer, Unit> getUnits()
+        public ArrayList<Unit> getUnitList()
             {
-                return units;
+                return unitList;
             }
     
-        public void setUnits(SortedMap<Integer, Unit> units)
+        public void setUnitList(ArrayList<Unit> unitList)
             {
-                this.units = units;
+                this.unitList = unitList;
+            }
+    
+        public SortedMap<String, Integer> getUnitQuantity()
+            {
+                return unitQuantity;
+            }
+    
+        public void setUnitQuantity(SortedMap<String, Integer> unitQuantity)
+            {
+                this.unitQuantity = unitQuantity;
             }
         
         public ArrayList<Building> getBuildings()

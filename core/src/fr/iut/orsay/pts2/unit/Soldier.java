@@ -5,6 +5,5 @@ public class Soldier extends Unit
         public Soldier(String name)
             {
                 super(name);
-                this.nbUnit++;
             }
     }

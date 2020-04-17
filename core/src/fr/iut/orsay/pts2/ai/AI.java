@@ -105,7 +105,7 @@ public class AI extends Civilization
                 System.out.println("technology");
             }
     
-        private Building needRessource()//TODO: change stock by rate + add this.getBuildings().getRessourceDistrict.get(0)
+        private Building needRessource()//TODO: change stock by rate + add this.getBuildings().      getRessourceDistrict        .get(0)
         {
             Building temp = this.getBuildings().get(0);
             for (Building b : this.getBuildings())
@@ -118,29 +118,94 @@ public class AI extends Civilization
             return temp;
         }
         
-        /*private Unit mostTroops()
-            {
-                return new Unit("j");
-            }*/
-    
         private void createUnit()
             {
                 Unit[] units = {new Boat("Boat"), new Soldier("Soldier"), new Soldier("Soldier")};
                 ArrayList<Unit> listOfUnits = new ArrayList<>(Arrays.asList(units));
-            
-                //TODO: aléat avec limit différence de X
-                Unit newUnit = Tools.chooseBetween(listOfUnits.toArray(new Unit[0]));
-                /*if (newUnit.getName() == "mostTroops().getName()") //TODO: implement mostTroops
-                    true;
-                if(this.getRelationships())*/
-                //IN war
-                //TODO: opti ennemi
-                //aléat ennemi
-                //TODO: % que opti ennemie = return sinon aléat entre others
+                Unit newUnit;
+    
+                if (isWar())
+                    {
+                        Civilization targetCiv = Tools.chooseBetween(listCiv().toArray(new Civilization[0]));
+                        newUnit = targetCiv.mostTroop();
+                        if (Tools.getLuck(CONSTANT.OPTI_UNIT_CREATE))
+                            {
+                                //TODO: create this unit (newUnit)
+                            }
+                        else
+                            {
+                                listOfUnits.remove(newUnit);
+                                newUnit = Tools.chooseBetween(listOfUnits.toArray(new Unit[0])); //TODO: create this unit
+                            }
+                    }
+                else
+                    {
+                        newUnit = Tools.chooseBetween(listOfUnits.toArray(new Unit[0]));
+                        if (newUnit.getName().equals(mostTroop().getName()))
+                            {
+                                listOfUnits.remove(newUnit);
+                                newUnit = Tools.chooseBetween(listOfUnits.toArray(new Unit[0])); //TODO: create this unit
+                            }
+                        //else
+                        //TODO: create this unit (newUnit)
+                    }
             }
     
         private void moveUnit()
             {
-            
+                Unit uTest = new Soldier("Jean");
+                if (isWar())
+                    {
+                        boolean j = true; //TODO: Djikstra + compare distance...
+                    }
+                else
+                    {
+                        if (true/*une troupe viens d'être créer*/)
+                            {
+                                while (!uTest.nextBorder(CONSTANT.WILDLAND))
+                                    {
+                                        int nextPos = Tools.chooseBetween(1, 2, 3, 4, 5, 6, 7, 8);
+                                        switch (nextPos)
+                                            {
+                                                case 1:
+                                                    uTest.move(0, 1);
+                                                    break;
+                                                case 2:
+                                                    uTest.move(1, 1);
+                                                    break;
+                                                case 3:
+                                                    uTest.move(1, 0);
+                                                    break;
+                                                case 4:
+                                                    uTest.move(1, -1);
+                                                    break;
+                                                case 5:
+                                                    uTest.move(0, -1);
+                                                    break;
+                                                case 6:
+                                                    uTest.move(-1, -1);
+                                                    break;
+                                                case 7:
+                                                    uTest.move(-1, 0);
+                                                    break;
+                                                case 8:
+                                                    uTest.move(-1, 1);
+                                                    break;
+                                                default:
+                                                    System.out.println("Error nextPos invalid number");
+                                                    break;
+                                            }
+                                        if (uTest.getMovementPoint() <= 0)
+                                            {
+                                                for (Unit u : this.getUnitList())
+                                                    {
+                                                        if (u.moveOn(CONSTANT.WILDLAND))
+                                                            break;
+                                            
+                                                    }
+                                            }
+                                    }
+                            }
+                    }
             }
     }
