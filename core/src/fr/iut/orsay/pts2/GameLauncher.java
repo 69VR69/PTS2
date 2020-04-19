@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fr.iut.orsay.pts2.Managers.GameStateManager;
+import fr.iut.orsay.pts2.States.MenuPrincipal;
 
 public class GameLauncher extends ApplicationAdapter {
 
@@ -15,6 +16,8 @@ public class GameLauncher extends ApplicationAdapter {
 	public void create () {
 		this.gsm = new GameStateManager();
 		this.sb = new SpriteBatch();
+
+		this.gsm.push(new MenuPrincipal(this.gsm));
 
 	}
 
