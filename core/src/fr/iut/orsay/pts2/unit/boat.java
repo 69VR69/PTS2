@@ -8,6 +8,6 @@ public class boat extends unit {
     public boat() {
         hp = 5000;
         dmg = 300;
-        range = 1;
+        range = 20;
     }
 }

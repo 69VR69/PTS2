@@ -7,11 +7,12 @@ public abstract class unit {
     protected double hp;
     protected double dmg;
     protected int range;
+    private int posX, posY;
 
 
     public void toAttack(unit u1, unit u2) {
         boolean isTouched = Gdx.input.isTouched();
-        if(isTouched && getDistance(u1, u2)>=range){
+        if(isTouched && getDistance(u1, u2)<=range){
             u2.setHp(u2.getHp()-u1.getDmg());
         }
     }
@@ -60,4 +61,19 @@ public abstract class unit {
         this.range = range;
     }
 
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
 }
