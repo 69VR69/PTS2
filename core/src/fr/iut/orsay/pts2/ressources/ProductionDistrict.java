@@ -1,7 +1,7 @@
 package fr.iut.orsay.pts2.ressources;
 
-public abstract class ProductionDistrict extends building {
-    protected int maxStock;
+public abstract class ProductionDistrict {
+    protected int maxStock=200;
     protected int stock;
     protected int rate;
 

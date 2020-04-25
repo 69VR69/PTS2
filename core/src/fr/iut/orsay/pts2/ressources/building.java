@@ -1,14 +1,16 @@
 package fr.iut.orsay.pts2.ressources;
 
-public abstract class building {
+public abstract class building extends ProductionDistrict {
         protected int price;
         protected int time;
-        protected int level;
+        protected int level=1;
         private String name;
         private String description;
 
-        public boolean upgrade(){
-
+        public void upgrade(){
+            this.setLevel(getLevel()+1);
+            this.setMaxStock((int) (this.getMaxStock()*1.5));
+            this.setTime((int) (getTime()*0.9));
         }
 
         public int getPrice() {
