@@ -53,5 +53,3 @@ public abstract class building extends ProductionDistrict {
             this.description = description;
         }
     }
-
-}

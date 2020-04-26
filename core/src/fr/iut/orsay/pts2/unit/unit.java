@@ -2,6 +2,8 @@ package fr.iut.orsay.pts2.unit;
 
 import com.badlogic.gdx.Gdx;
 
+import static fr.iut.orsay.pts2.Tools.getDistance;
+
 public abstract class unit {
     protected int lvl=1;
     protected double hp;
