@@ -2,10 +2,14 @@ package fr.iut.orsay.pts2.map;
 
 import java.util.*;
 
-public class GenerateMap {
-    private int width = 10;
-    private int height = 10;
-    private int tolerance = 4;
+
+import fr.iut.orsay.pts2.CONSTANT;
+import fr.iut.orsay.pts2.GetLuck;
+
+public class GenerateMap implements Cloneable{
+    private int width = CONSTANT.WIDTH;
+    private int height = CONSTANT.HEIGHT;
+    private int tolerance = CONSTANT.TOLERANCE;
     private Element[][] mapContent;
     private Element[] possibleElement;
     private List<Element>[] addedElement;
@@ -13,8 +17,13 @@ public class GenerateMap {
     private int totalCounted = 0;
 
     GenerateMap() {
-        this.setUpPossibleElement();
+        this.possibleElement = Element.setPossibleElement();
         this.totalAdded = getHeight() * getWidth();
+        this.mapContent = new Element[this.width][this.height];
+        this.RandomSeed();
+        this.printMatrix();
+       // this.setRealPosition();
+        this.getPosition();
     }
 
     public int getWidth() {
@@ -23,15 +32,6 @@ public class GenerateMap {
 
     public int getHeight() {
         return this.height;
-    }
-
-    public void setUpPossibleElement() {
-        this.possibleElement = Element.setPossibleElement();
-        this.addedElement = (ArrayList<Element>[]) new ArrayList[possibleElement.length];
-    }
-
-    public void generateMatrix() {
-        this.mapContent = new Element[this.width][this.height];
     }
 
     public void printMatrix() {
@@ -62,24 +62,89 @@ public class GenerateMap {
         return randomNumber;
     }
 
-    public void setElementAtRandomPosition() {
-        int i = 0;
+    public void RandomSeed() {
+
         while (!mapIsFull()) {
             int randomW = generateRandomNumber();
             int randomH = generateRandomNumber();
+            Element rndElement = generateRandomElement();
             if (mapContent[randomW][randomH] == null) {
-                this.mapContent[randomW][randomH] = generateRandomElement();
-                this.mapContent[randomW][randomH].setLocation(randomW, randomH);
-                try {
-                    extendSeed((Element) mapContent[randomW][randomH].clone());
-                } catch (CloneNotSupportedException e) {
-                }
+                if (GetLuck.getLuck(rndElement.getPercent())) {
+                    this.mapContent[randomW][randomH] = rndElement;
 
+                    //  this.mapContent[randomW][randomH].setLocation(randomW, randomH);
+                    this.setElementAtThisPosition(randomW,randomH,(mapContent[randomW][randomH].clone()));
+                    extendSeed(mapContent[randomW][randomH].clone());
+
+                }
             }
-            i++;
+
+        }
+        for (int i = 0; i < tolerance; i++) {
+            this.cleanMap();
         }
     }
 
+    private void cleanMap() {
+        for (Element[] elements : mapContent) {
+            for (Element element : elements) {
+                    // if(GetLuck.getLuck(element.getPercent()))
+                    this.matchElementWithEnvironnement( element.clone());
+
+            }
+
+        }
+    }
+
+    private void matchElementWithEnvironnement(Element element) {
+        boolean added = false;
+        while (!added) {
+            System.out.println("update");
+                switch (CONSTANT.RND.nextInt(4)) {
+                    /*top*/
+                    case 0:
+                        if ( element.getLocationW() > 0) {
+                            Element newElement = this.mapContent[element.getLocationW() - 1][element.getLocationH()].clone();
+                           // newElement.setLocation(aux.getLocationW() - 1, aux.getLocationH());
+                            this.setElementAtThisPosition(element.getLocationW(),element.getLocationH(),newElement/*.clone()*/);
+                            added = true;
+                            this.mapContent[element.getLocationW()][element.getLocationH()] = newElement;
+                        }
+                        break;
+                    /*right*/
+                    case 1:
+                        if (element.getLocationH() < getHeight() - 1) {
+                            Element newElement =  this.mapContent[element.getLocationW()][element.getLocationH() + 1].clone();
+                            //newElement.setLocation(aux.getLocationW(), aux.getLocationH() + 1);
+                            setElementAtThisPosition(element.getLocationW(),element.getLocationH(),newElement/*.clone()*/);
+                            added = true;
+                            this.mapContent[element.getLocationW()][element.getLocationH()] = newElement;
+                        }
+                        break;
+                    case 2:
+                        /*bottom*/
+                        if ( element.getLocationW() < this.getWidth() - 1) {
+                            Element newElement =  this.mapContent[element.getLocationW() + 1][element.getLocationH()].clone();
+                            //newElement.setLocation(aux.getLocationW() + 1, aux.getLocationH());
+                            this.setElementAtThisPosition(element.getLocationW(),element.getLocationH(),newElement/*.clone()*/);
+                            added = true;
+                            this.mapContent[element.getLocationW()][element.getLocationH()] = newElement;
+                        }
+                        break;
+                    case 3:
+                        /*left*/
+                        if (element.getLocationH() > 0) {
+                            Element newElement =  this.mapContent[element.getLocationW()][element.getLocationH() - 1].clone();
+                           // newElement.setLocation(aux.getLocationW(), aux.getLocationH() - 1);
+                            this.setElementAtThisPosition(element.getLocationW(),element.getLocationH(),newElement/*.clone()*/);
+                            this.mapContent[element.getLocationW()][element.getLocationH()] = newElement;
+                        }
+                        break;
+                }
+
+
+        }
+    }
 
     private boolean mapIsFull() {
         int expected_total = this.getWidth() * this.getHeight();
@@ -95,67 +160,45 @@ public class GenerateMap {
         return total_found >= expected_total;
     }
 
-    private void generateNewRandomSeed(Element element) {
-        boolean added = false;
-        while (added == false) {
-            Random rand = new Random();
-            int random_number_w = rand.nextInt(this.width);
-            int random_number_h = rand.nextInt(this.height);
-            //We are clonning the element, but somehow the clone method is returning an object method only.
-            if (this.mapContent[random_number_w][random_number_h] == null) {
-                this.setElementAtThisPosition(random_number_w, random_number_h, element);
-                added = true;
-            }
-        }
-    }
-
     private boolean extendSeed(Element element) {
-        List<Integer> solution = new ArrayList<Integer>();
-        for (int i = 0; i < 4; i++) {
-            solution.add(i);
-        }
-        Collections.shuffle(solution);
         boolean added = false;
-        // Element aux = new Element();
+        if (comparationElementPercent(element)) {
 
-        for (int i = 0; i < 4; i++) {
-            int location = solution.get(i);
-            switch (location) {
-                /*top*/
-                case 0:
-                    if (mapContent[element.getLocationW()][element.getLocationH()].getLocationW() > 0 && mapContent[element.getLocationW() - 1][element.getLocationH()] == null) {
-                        this.setElementAtThisPosition(element.getLocationW() - 1, element.getLocationH(), element);
-                        added = true;
-                        i = 4;
-                    }
-                    break;
-                /*bottom*/
-                case 1:
-                    if (mapContent[element.getLocationW()][element.getLocationH()].getLocationW() < getWidth() - 1 && mapContent[element.getLocationW() + 1][element.getLocationH()] == null) {
-                        this.setElementAtThisPosition(element.getLocationW() + 1, element.getLocationH(), element);
-                        added = true;
-                        i = 4;
-                    }
-                    break;
-                /*left*/
-                case 2:
-                    if (mapContent[element.getLocationW()][element.getLocationH()].getLocationH() > 0 && mapContent[element.getLocationW()][element.getLocationH() - 1] == null) {
-                        this.setElementAtThisPosition(element.getLocationW(), element.getLocationH() - 1, element);
-                        added = true;
-                        i = 4;
-                    }
-                    break;
-                /*right*/
-                case 3:
-                    if (mapContent[element.getLocationW()][element.getLocationH()].getLocationH() < getHeight() - 1 && mapContent[element.getLocationW()][element.getLocationH() + 1] == null) {
-                        this.setElementAtThisPosition(element.getLocationW(), element.getLocationH() + 1, element);
-                        added = true;
-                        i = 4;
-                    }
-                    break;
-            }
-        }
+                switch (CONSTANT.RND.nextInt(4)) {
+                    /*top*/
+                    case 0:
+                        if (mapContent[element.getLocationW()][element.getLocationH()].getLocationW() > 0 && mapContent[element.getLocationW() - 1][element.getLocationH()] == null) {
+                            this.setElementAtThisPosition(element.getLocationW() - 1, element.getLocationH(),  element.clone());
+                            added = true;
 
+                        }
+                        break;
+                    /*bottom*/
+                    case 1:
+                        if (mapContent[element.getLocationW()][element.getLocationH()].getLocationW() < getWidth() - 1 && mapContent[element.getLocationW() + 1][element.getLocationH()] == null) {
+                            this.setElementAtThisPosition(element.getLocationW() + 1, element.getLocationH(), element.clone());
+                            added = true;
+
+                        }
+                        break;
+                    /*left*/
+                    case 2:
+                        if (mapContent[element.getLocationW()][element.getLocationH()].getLocationH() > 0 && mapContent[element.getLocationW()][element.getLocationH() - 1] == null) {
+                            this.setElementAtThisPosition(element.getLocationW(), element.getLocationH() - 1, element.clone());
+                            added = true;
+
+                        }
+                        break;
+                    /*right*/
+                    case 3:
+                        if (mapContent[element.getLocationW()][element.getLocationH()].getLocationH() < getHeight() - 1 && mapContent[element.getLocationW()][element.getLocationH() + 1] == null) {
+                            this.setElementAtThisPosition(element.getLocationW(), element.getLocationH() + 1,  element.clone());
+                            added = true;
+                        }
+                        break;
+                }
+
+             }
         return added;
 
     }
@@ -186,13 +229,20 @@ public class GenerateMap {
     }
 
     public void getPosition() {
-        for (int i = 0; i < this.mapContent.length; i++) {
-            for (int j = 0; j < mapContent[i].length; j++) {
-                if (mapContent[i][j] != null) {
-                    System.out.println(mapContent[i][j].getLocationW() + " " + mapContent[i][j].getLocationH());
-                }
+        for (Element[] elements : mapContent) {
+            for (Element element : elements) {
+                System.out.println(element.getLocationW() + " : " + element.getLocationH());
             }
-
         }
     }
+
+    private void setRealPosition() {
+        for (int i = 0; i < mapContent.length; i++) {
+            for (int j = 0; j < mapContent[i].length; j++) {
+                    this.setElementAtThisPosition(i, j ,mapContent[i][j].clone());
+
+            }
+        }
+    }
+
 }

@@ -1,18 +1,22 @@
 package fr.iut.orsay.pts2.map;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import fr.iut.orsay.pts2.CONSTANT;
+
 public class Element implements Cloneable {
     private int type = 0;
+    private ElementType elementType;
+
     private int locationW;
     private int locationH;
-    private int percent = 100;
-    private boolean check = false;
-    public int locationType;
+    private int percent ;
 
-    Element top, left, right, bottom;
 
     /*Constructor*/
-    Element() {
-
+    Element(ElementType elementType) {
+        this.elementType = elementType;
     }
 
     /*Getters and setters*/
@@ -23,22 +27,6 @@ public class Element implements Cloneable {
 
     public int getType() {
         return this.type;
-    }
-
-    public boolean getCheck() {
-        return this.check;
-    }
-
-    public void setCheck(boolean check) {
-        this.check = check;
-    }
-
-    public void setCheckTrue() {
-        this.check = true;
-    }
-
-    public void setCheckFalse() {
-        this.check = false;
     }
 
     public void setLocation(int locationW, int locationH) {
@@ -63,23 +51,30 @@ public class Element implements Cloneable {
         return this.percent;
     }
 
+
     /*functions*/
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Element clone()  {
+        Element e =null;
+        try {
+             e = ((Element) super.clone());
+        }catch (CloneNotSupportedException cnse){
+            cnse.printStackTrace(System.err);
+        }
+        return e;
     }
 
     public static Element[] setPossibleElement() {
         Element[] possibleElement = new Element[5];
-        possibleElement[0] = new Element();
-        possibleElement[0].setType(0).setPercent(70);//Ground
-        possibleElement[1] = new Element();
-        possibleElement[1].setType(1).setPercent(20);//water
-        possibleElement[2] = new Element();
-        possibleElement[2].setType(2).setPercent(30);//forest
-        possibleElement[3] = new Element();
-        possibleElement[3].setType(3).setPercent(40);//sand
-        possibleElement[4] = new Element();
-        possibleElement[4].setType(4).setPercent(50);//Mountains
+        possibleElement[0] = new Element(new ElementType(0,"klanzflak","ak,fakfzl,aklf"));
+        possibleElement[0].setPercent(CONSTANT.PERCENTGROUND);//Ground
+        possibleElement[1] = new Element(new ElementType(1,"klanzflak","ak,fakfzl,aklf"));
+        possibleElement[1].setPercent(CONSTANT.PERCENTWATER);//water
+        possibleElement[2] = new Element(new ElementType(2,"klanzflak","ak,fakfzl,aklf"));
+        possibleElement[2].setPercent(CONSTANT.PERCENTFOREST);//forest
+        possibleElement[3] = new Element(new ElementType(3,"klanzflak","ak,fakfzl,aklf"));
+        possibleElement[3].setPercent(CONSTANT.PERCENTSAND);//sand
+        possibleElement[4] = new Element(new ElementType(4,"klanzflak","ak,fakfzl,aklf"));
+        possibleElement[4].setPercent(CONSTANT.PERCENTMOUNTAIN);//Mountains
         return possibleElement;
     }
 
