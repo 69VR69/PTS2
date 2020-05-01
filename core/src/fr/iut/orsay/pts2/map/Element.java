@@ -1,17 +1,16 @@
 package fr.iut.orsay.pts2.map;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import com.badlogic.gdx.Gdx;
 
 import fr.iut.orsay.pts2.CONSTANT;
 
 public class Element implements Cloneable {
-    private int type = 0;
+
     private ElementType elementType;
 
     private int locationW;
     private int locationH;
-    private int percent ;
+    private int percent;
 
 
     /*Constructor*/
@@ -20,13 +19,20 @@ public class Element implements Cloneable {
     }
 
     /*Getters and setters*/
-    private Element setType(int type) {
-        this.type = type;
-        return this;
-    }
 
-    public int getType() {
-        return this.type;
+    public static Element[] setPossibleElement() {
+        Element[] possibleElement = new Element[5];
+        possibleElement[0] = new Element(new ElementType(0, Gdx.files.internal("texture/terre.png")));
+        possibleElement[0].setPercent(CONSTANT.PERCENTGROUND);//Ground
+        possibleElement[1] = new Element(new ElementType(1, Gdx.files.internal("texture/eau.png"), Gdx.files.internal("texture/eau2.png")));
+        possibleElement[1].setPercent(CONSTANT.PERCENTWATER);//water
+        possibleElement[2] = new Element(new ElementType(2, Gdx.files.internal("texture/foret.png")));
+        possibleElement[2].setPercent(CONSTANT.PERCENTFOREST);//forest
+        possibleElement[3] = new Element(new ElementType(3, Gdx.files.internal("texture/sable.png")));
+        possibleElement[3].setPercent(CONSTANT.PERCENTSAND);//sand
+        possibleElement[4] = new Element(new ElementType(4, Gdx.files.internal("texture/montagne.png")));
+        possibleElement[4].setPercent(CONSTANT.PERCENTMOUNTAIN);//Mountains
+        return possibleElement;
     }
 
     public void setLocation(int locationW, int locationH) {
@@ -42,40 +48,28 @@ public class Element implements Cloneable {
         return this.locationH;
     }
 
+    public int getPercent() {
+        return this.percent;
+    }
+
     private Element setPercent(int percent) {
         this.percent = percent;
         return this;
     }
 
-    public int getPercent() {
-        return this.percent;
-    }
-
-
     /*functions*/
-    public Element clone()  {
-        Element e =null;
+    public Element clone() {
+        Element e = null;
         try {
-             e = ((Element) super.clone());
-        }catch (CloneNotSupportedException cnse){
+            e = ((Element) super.clone());
+        } catch (CloneNotSupportedException cnse) {
             cnse.printStackTrace(System.err);
         }
         return e;
     }
 
-    public static Element[] setPossibleElement() {
-        Element[] possibleElement = new Element[5];
-        possibleElement[0] = new Element(new ElementType(0,"klanzflak","ak,fakfzl,aklf"));
-        possibleElement[0].setPercent(CONSTANT.PERCENTGROUND);//Ground
-        possibleElement[1] = new Element(new ElementType(1,"klanzflak","ak,fakfzl,aklf"));
-        possibleElement[1].setPercent(CONSTANT.PERCENTWATER);//water
-        possibleElement[2] = new Element(new ElementType(2,"klanzflak","ak,fakfzl,aklf"));
-        possibleElement[2].setPercent(CONSTANT.PERCENTFOREST);//forest
-        possibleElement[3] = new Element(new ElementType(3,"klanzflak","ak,fakfzl,aklf"));
-        possibleElement[3].setPercent(CONSTANT.PERCENTSAND);//sand
-        possibleElement[4] = new Element(new ElementType(4,"klanzflak","ak,fakfzl,aklf"));
-        possibleElement[4].setPercent(CONSTANT.PERCENTMOUNTAIN);//Mountains
-        return possibleElement;
+    public ElementType getElementType() {
+        return elementType;
     }
 
 }
