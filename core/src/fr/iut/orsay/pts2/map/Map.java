@@ -1,73 +1,33 @@
 package fr.iut.orsay.pts2.map;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import java.util.ArrayList;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.utils.Array;
 
 import fr.iut.orsay.pts2.MAP_CONFIG;
-import fr.iut.orsay.pts2.gameManager.GameState;
-import fr.iut.orsay.pts2.gameManager.GameStateManager;
 
-public class Map extends GameState
+class Map
     {
-        private SpriteBatch batch;
-        private ArrayList<Texture> texture;
-        private int[][] positionTexture;
-        private int counter;
-        private int secondCounter;
-        
-        public Map(GameStateManager gsm)
+        private TiledMap map;
+    
+        Map()
             {
-                super(gsm);
-                batch = new SpriteBatch();
-                GenerateMap map = new GenerateMap();
-                texture = new ArrayList<>();
-                positionTexture = new int[map.getTotalAdded()][2];
-                for (Element[] el : map.getMapContent())
-                    {
-                        for (Element e : el)
-                            {
-                                int randomNumber = MAP_CONFIG.RND.nextInt(e.getElementType().getTexturePath().size());
-                                texture.add(new Texture(e.getElementType().getTexturePath().get(randomNumber)));
-                                positionTexture[counter][0] = e.getLocationW();
-                                positionTexture[counter][1] = e.getLocationH();
-                                counter++;
-                            }
-                    }
+                GenerateMap mapMatrix = new GenerateMap();
+                Array<Texture> texture = new Array<>();
+    
+                for (Element[] el : mapMatrix.getMapContent())
+                    for (Element e : el)
+                        texture.add(new Texture(e.getElementType().getTexturePath().get(MAP_CONFIG.RND.nextInt(e.getElementType().getTexturePath().size()))));
+                map = new TiledMap();
+                TiledMapTileLayer mapLayer = new TiledMapTileLayer(mapMatrix.getWidth(), mapMatrix.getHeight(), 16, 16);
+                map.getLayers().add(mapLayer);
+                map.setOwnedResources(texture);
+                
             }
-        
-        @Override protected void handleInput()
+    
+        TiledMap getMap()
             {
-            
+                return map;
             }
-        
-        @Override public void update(float dt)
-            {
-            
-            }
-        
-        @Override public void render(SpriteBatch batch)
-            {
-                Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
-                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                batch.setProjectionMatrix(this.cam.combined);//TODO:textures clignotent + taille + bavures+supperposition
-                batch.begin();
-                for (Texture t : texture)
-                    {
-                        batch.draw(t, positionTexture[secondCounter][0], positionTexture[secondCounter][1], 100, 100);
-                        secondCounter++;
-                    }
-                batch.end();
-            }
-        
-        public void dispose()
-            {
-                batch.dispose();
-                for (Texture t : texture)
-                    t.dispose();
-            }
-        
     }

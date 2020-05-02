@@ -126,13 +126,13 @@ class GenerateMap implements Cloneable
             {
                 return totalAdded;
             }
-        
-        private int getWidth()
+    
+        public int getWidth()
             {
                 return this.width;
             }
-        
-        private int getHeight()
+    
+        public int getHeight()
             {
                 return this.height;
             }

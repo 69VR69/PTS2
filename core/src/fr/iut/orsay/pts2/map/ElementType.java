@@ -23,13 +23,13 @@ public class ElementType
             {
                 return texturePath;
             }
-        
-        int getType()
+    
+        public int getType()
             {
                 return type;
             }
-        
-        int getPercent()
+    
+        public int getPercent()
             {
                 return percent;
             }

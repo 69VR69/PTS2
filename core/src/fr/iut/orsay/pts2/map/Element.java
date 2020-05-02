@@ -24,8 +24,8 @@ public class Element implements Cloneable
                     }
                 return e;
             }
-        
-        ElementType getElementType()
+    
+        public ElementType getElementType()
             {
                 return elementType;
             }

@@ -35,7 +35,14 @@ public abstract class MAP_CONFIG
         
         public static Element RandomElement()
             {
-                return possibleElement[MAP_CONFIG.RND.nextInt(possibleElement.length)];
+                Element x = null;
+                while (x == null)
+                    {
+                        Element a = possibleElement[MAP_CONFIG.RND.nextInt(possibleElement.length)];
+                        if (getLuck(a.getElementType().getPercent()))
+                            x = a;
+                    }
+                return x;
             }
         
         public static boolean getLuck(double coef)
