@@ -2,7 +2,7 @@ package fr.iut.orsay.pts2;
 
 import com.badlogic.gdx.Game;
 
-import fr.iut.orsay.pts2.map.GameScreen;
+import fr.iut.orsay.pts2.gameManager.GameScreen;
 
 public class GameLauncher extends Game
     {

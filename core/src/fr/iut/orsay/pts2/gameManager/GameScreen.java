@@ -1,4 +1,4 @@
-package fr.iut.orsay.pts2.map;
+package fr.iut.orsay.pts2.gameManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import fr.iut.orsay.pts2.map.MapMatrix;
+
 public class GameScreen extends ScreenAdapter
     {
         //TODO: aucun affichage, test du game screen à faire + debug
@@ -20,7 +22,7 @@ public class GameScreen extends ScreenAdapter
         private static final float PROMPT_FADE_OUT = 4f;
     
         private SpriteBatch batch;
-        private Map mapMatrix;
+        private MapMatrix mapMatrix;
         private OrthographicCamera camera;
         private Viewport viewport;
         private ScreenViewport screenViewport;
@@ -42,7 +44,7 @@ public class GameScreen extends ScreenAdapter
                 guiCam.setToOrtho(false);
                 
                 // Setup map renderer
-                this.mapMatrix = new Map();
+                this.mapMatrix = new MapMatrix();
                 final float unitScale = 1f / Math.max(16, 16);
                 renderer = new OrthogonalTiledMapRenderer(mapMatrix.getMap(), unitScale);
             }

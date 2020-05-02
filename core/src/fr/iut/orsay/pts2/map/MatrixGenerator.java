@@ -2,14 +2,14 @@ package fr.iut.orsay.pts2.map;
 
 import fr.iut.orsay.pts2.MAP_CONFIG;
 
-class GenerateMap implements Cloneable
+class MatrixGenerator implements Cloneable
     {
         private int width = MAP_CONFIG.WIDTH;
         private int height = MAP_CONFIG.HEIGHT;
         private Element[][] mapContent;
         private int totalAdded = 0;
-        
-        GenerateMap()
+    
+        MatrixGenerator()
             {
                 this.totalAdded = getHeight() * getWidth();
                 this.mapContent = new Element[this.width][this.height];

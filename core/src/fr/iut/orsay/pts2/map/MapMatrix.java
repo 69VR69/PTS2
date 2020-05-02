@@ -7,13 +7,13 @@ import com.badlogic.gdx.utils.Array;
 
 import fr.iut.orsay.pts2.MAP_CONFIG;
 
-class Map
+public class MapMatrix
     {
         private TiledMap map;
     
-        Map()
+        public MapMatrix()
             {
-                GenerateMap mapMatrix = new GenerateMap();
+                MatrixGenerator mapMatrix = new MatrixGenerator();
                 Array<Texture> texture = new Array<>();
     
                 for (Element[] el : mapMatrix.getMapContent())
@@ -26,7 +26,7 @@ class Map
                 
             }
     
-        TiledMap getMap()
+        public TiledMap getMap()
             {
                 return map;
             }
