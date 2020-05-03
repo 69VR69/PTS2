@@ -153,59 +153,134 @@ public class AI extends Civilization
     
         private void moveUnit()
             {
-                Unit uTest = new Soldier("Jean");
                 if (isWar())
                     {
-                        boolean j = true; //TODO: Djikstra + compare distance...
+                        warMovement(this.listCivByRelationship('W').toArray(new Civilization[0]));
                     }
                 else
                     {
-                        if (true/*une troupe viens d'être créer*/)
-                            {
-                                while (!uTest.nextBorder(CONSTANT.WILDLAND))
-                                    {
-                                        int nextPos = (int) Tools.chooseBetween(1, 2, 3, 4, 5, 6, 7, 8);
-                                        switch (nextPos)
-                                            {
-                                                case 1:
-                                                    uTest.move(0, 1);
-                                                    break;
-                                                case 2:
-                                                    uTest.move(1, 1);
-                                                    break;
-                                                case 3:
-                                                    uTest.move(1, 0);
-                                                    break;
-                                                case 4:
-                                                    uTest.move(1, -1);
-                                                    break;
-                                                case 5:
-                                                    uTest.move(0, -1);
-                                                    break;
-                                                case 6:
-                                                    uTest.move(-1, -1);
-                                                    break;
-                                                case 7:
-                                                    uTest.move(-1, 0);
-                                                    break;
-                                                case 8:
-                                                    uTest.move(-1, 1);
-                                                    break;
-                                                default:
-                                                    System.out.println("Error nextPos invalid number");
-                                                    break;
-                                            }
-                                        if (uTest.getMovementPoint() <= 0)
-                                            {
-                                                for (Unit u : this.getUnitList())
-                                                    {
-                                                        if (u.moveOn(CONSTANT.WILDLAND))
-                                                            break;
+                        safeMovement();
+                    }
+            }
     
-                                                    }
+        private void safeMovement()
+            {
+                Unit uTest = new Soldier("Jean");
+                if (true/*une troupe viens d'être créer*/)
+                    {
+                        while (!uTest.nextBorder(CONSTANT.WILDLAND))
+                            {
+                                int nextPos = (int) Tools.chooseBetween(1, 2, 3, 4, 5, 6, 7, 8);
+                                switch (nextPos)
+                                    {
+                                        case 1:
+                                            uTest.move(0, 1);
+                                            break;
+                                        case 2:
+                                            uTest.move(1, 1);
+                                            break;
+                                        case 3:
+                                            uTest.move(1, 0);
+                                            break;
+                                        case 4:
+                                            uTest.move(1, -1);
+                                            break;
+                                        case 5:
+                                            uTest.move(0, -1);
+                                            break;
+                                        case 6:
+                                            uTest.move(-1, -1);
+                                            break;
+                                        case 7:
+                                            uTest.move(-1, 0);
+                                            break;
+                                        case 8:
+                                            uTest.move(-1, 1);
+                                            break;
+                                        default:
+                                            System.out.println("Error nextPos invalid number");
+                                            break;
+                                    }
+                                if (uTest.getMovementPoint() <= 0)
+                                    {
+                                        for (Unit u : this.getUnitList())
+                                            {
+                                                if (u.moveOn(CONSTANT.WILDLAND))
+                                                    break;
+                                            
                                             }
                                     }
                             }
                     }
+            }
+    
+        private void warMovement(Civilization... civilizations)
+            {
+                /*
+                class Ennemy:
+                    weight = {
+                            "archer": 2,
+                            "soldat": 3,
+                            "chevalier": 5
+                            }
+
+                    def __init__(self, ennemyNumber, x, y):
+                        """
+                            parameter:
+                            ennemyNumber: dict of ennemy number
+                            example:
+                            {"archer": 3, "soldat": 2}
+                        """
+                        self.weight = self._initWeight(ennemyNumber)
+                        self.x = x
+                        self.y = y
+                        self.depressionRate = 0.2
+    
+                    def _initWeight(self, ennemyNumber):
+                        weight = 0
+
+                        for types, number in ennemyNumber.items():
+                            weight += number * Ennemy.weight[types]
+        
+                        return weight
+
+                class Board:
+
+                    def __init__(self, height, width):
+                        self.height = height
+                        self.width = width
+                        self.board = [[0 for x in range(width)] for y in range(height)]
+    
+                    def getTacticalBoard(self, ennemies):
+                        output = [[0 for x in range(self.width)] for y in range(self.height)]
+
+                        for ennemi in ennemies:
+                            for y in range(self.height):
+                                for x in range(self.width):
+                                    deltaX, deltaY = abs(ennemi.x - x), abs(ennemi.y - y)
+                                    output[y][x] += ennemi.weight - (ennemi.weight * (deltaX + deltaY) * ennemi.depressionRate)
+        
+                    return output
+    
+                @staticmethod
+                    def displayBoard(board):
+                        for line in board:
+                            for element in line:
+                                print("{:5}".format(round(element, 2)), end=" ")
+                                print()
+        
+    
+               class Game:
+
+                    def __init__(self):
+                        self.Ennemy = [] # list qui contient tout les ennemies
+    
+
+                        test = Ennemy({"archer": 3, "soldat": 2}, 2, 2)
+                        test2 = Ennemy({"archer": 3, "soldat": 2}, 3, 3)
+                        board = Board(10, 10)
+
+                Board.displayBoard(board.getTacticalBoard([test, test2]))
+                */
             }
     }

@@ -68,11 +68,28 @@ public abstract class Civilization
                 for (Relationship r : this.getRelationships())
                     {
                         if (r.getRelationStep() == 'W')
-                            result = true;
+                            {
+                                result = true;
+                                break;
+                            }
                     }
                 return result;
             }
     
+        public ArrayList<Civilization> listCivByRelationship(char relationStep)
+            {
+                ArrayList<Civilization> civList = new ArrayList<>();
+                for (Relationship r : this.getRelationships())
+                    {
+                        if (r.getRelationStep() == relationStep)
+                            if (this.getName().equals(r.getCiv1().getName()))
+                                civList.add(r.getCiv2());
+                            else
+                                civList.add(r.getCiv1());
+                    }
+                return civList;
+            }
+        
         public ArrayList<Civilization> listCiv()
             {
                 ArrayList<Civilization> civList = new ArrayList<>();
