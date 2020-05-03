@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fr.iut.orsay.pts2.gameManager.GameStateManager;
-import fr.iut.orsay.pts2.map.MapMatrix;
+import fr.iut.orsay.pts2.map.MapRender;
 
 public class GameLauncher extends ApplicationAdapter
     {
@@ -17,7 +17,7 @@ public class GameLauncher extends ApplicationAdapter
                 this.gsm = new GameStateManager();
                 this.batch = new SpriteBatch();
     
-                this.gsm.push(new MapMatrix(this.gsm));
+                this.gsm.push(new MapRender(this.gsm));
             }
     
         @Override public void render()

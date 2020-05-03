@@ -13,7 +13,7 @@ import fr.iut.orsay.pts2.config.MAP_CONFIG;
 import fr.iut.orsay.pts2.gameManager.GameState;
 import fr.iut.orsay.pts2.gameManager.GameStateManager;
 
-public class MapMatrix extends GameState
+public class MapRender extends GameState
     {
     
         private MatrixGenerator mapMatrix;
@@ -22,7 +22,7 @@ public class MapMatrix extends GameState
         private int screenHeight = Gdx.graphics.getHeight();
         private int textureWidth = screenwidth / MAP_CONFIG.WIDTH, textureHeight = screenHeight / MAP_CONFIG.HEIGHT;
     
-        public MapMatrix(GameStateManager gsm)
+        public MapRender(GameStateManager gsm)
             {
                 super(gsm);
                 this.mapMatrix = new MatrixGenerator();
@@ -35,6 +35,7 @@ public class MapMatrix extends GameState
                             Texture t = this.resize(e.getElementType().getTexturePath().get(textureIndex));
                             map.put(e, t);
                         }
+                System.out.println("screenSize: (" + this.screenwidth + "," + this.screenHeight + ")");
             }
     
         @Override protected void handleInput()

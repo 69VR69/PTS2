@@ -7,6 +7,7 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import fr.iut.orsay.pts2.buildings.Building;
 import fr.iut.orsay.pts2.relationship.Relationship;
 import fr.iut.orsay.pts2.unit.Unit;
 

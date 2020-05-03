@@ -1,4 +1,4 @@
-package fr.iut.orsay.pts2;
+package fr.iut.orsay.pts2.config;
 
 import java.util.Random;
 

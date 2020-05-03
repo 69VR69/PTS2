@@ -3,10 +3,10 @@ package fr.iut.orsay.pts2.ai;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import fr.iut.orsay.pts2.Building;
-import fr.iut.orsay.pts2.CONSTANT;
 import fr.iut.orsay.pts2.Civilization;
-import fr.iut.orsay.pts2.Tools;
+import fr.iut.orsay.pts2.buildings.Building;
+import fr.iut.orsay.pts2.config.CONSTANT;
+import fr.iut.orsay.pts2.config.Tools;
 import fr.iut.orsay.pts2.relationship.Relationship;
 import fr.iut.orsay.pts2.unit.Boat;
 import fr.iut.orsay.pts2.unit.Soldier;
@@ -111,7 +111,7 @@ public class AI extends Civilization
             for (Building b : this.getBuildings())
                 {
                     if (b.getStock() == temp.getStock())
-                        temp = Tools.chooseBetween(b, temp);
+                        temp = (Building) Tools.chooseBetween(b, temp);
                     else if (b.getStock() < temp.getStock())
                         temp = b;
                 }
@@ -126,7 +126,7 @@ public class AI extends Civilization
     
                 if (isWar())
                     {
-                        Civilization targetCiv = Tools.chooseBetween(listCiv().toArray(new Civilization[0]));
+                        Civilization targetCiv = (Civilization) Tools.chooseBetween((Object) listCiv().toArray(new Civilization[0]));
                         newUnit = targetCiv.mostTroop();
                         if (Tools.getLuck(CONSTANT.OPTI_UNIT_CREATE))
                             {
@@ -135,16 +135,16 @@ public class AI extends Civilization
                         else
                             {
                                 listOfUnits.remove(newUnit);
-                                newUnit = Tools.chooseBetween(listOfUnits.toArray(new Unit[0])); //TODO: create this unit
+                                newUnit = (Unit) Tools.chooseBetween((Object) listOfUnits.toArray(new Unit[0])); //TODO: create this unit
                             }
                     }
                 else
                     {
-                        newUnit = Tools.chooseBetween(listOfUnits.toArray(new Unit[0]));
+                        newUnit = (Unit) Tools.chooseBetween((Object) listOfUnits.toArray(new Unit[0]));
                         if (newUnit.getName().equals(mostTroop().getName()))
                             {
                                 listOfUnits.remove(newUnit);
-                                newUnit = Tools.chooseBetween(listOfUnits.toArray(new Unit[0])); //TODO: create this unit
+                                newUnit = (Unit) Tools.chooseBetween((Object) listOfUnits.toArray(new Unit[0])); //TODO: create this unit
                             }
                         //else
                         //TODO: create this unit (newUnit)
@@ -164,7 +164,7 @@ public class AI extends Civilization
                             {
                                 while (!uTest.nextBorder(CONSTANT.WILDLAND))
                                     {
-                                        int nextPos = Tools.chooseBetween(1, 2, 3, 4, 5, 6, 7, 8);
+                                        int nextPos = (int) Tools.chooseBetween(1, 2, 3, 4, 5, 6, 7, 8);
                                         switch (nextPos)
                                             {
                                                 case 1:
@@ -201,7 +201,7 @@ public class AI extends Civilization
                                                     {
                                                         if (u.moveOn(CONSTANT.WILDLAND))
                                                             break;
-                                            
+    
                                                     }
                                             }
                                     }

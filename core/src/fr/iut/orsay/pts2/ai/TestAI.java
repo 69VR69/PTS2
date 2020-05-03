@@ -1,9 +1,9 @@
-package fr.iut.orsay.pts2;
+package fr.iut.orsay.pts2.ai;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import fr.iut.orsay.pts2.ai.AI;
+import fr.iut.orsay.pts2.buildings.Building;
 import fr.iut.orsay.pts2.relationship.Relationship;
 import fr.iut.orsay.pts2.unit.Boat;
 import fr.iut.orsay.pts2.unit.Soldier;
