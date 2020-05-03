@@ -1,6 +1,6 @@
 package fr.iut.orsay.pts2.map;
 
-import fr.iut.orsay.pts2.MAP_CONFIG;
+import fr.iut.orsay.pts2.config.MAP_CONFIG;
 
 class MatrixGenerator implements Cloneable
     {

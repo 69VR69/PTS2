@@ -1,22 +1,33 @@
 package fr.iut.orsay.pts2;
 
-import com.badlogic.gdx.Game;
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import fr.iut.orsay.pts2.gameManager.GameScreen;
+import fr.iut.orsay.pts2.gameManager.GameStateManager;
+import fr.iut.orsay.pts2.map.MapMatrix;
 
-public class GameLauncher extends Game
+public class GameLauncher extends ApplicationAdapter
     {
-        private GameScreen gameScreen;
-    
+        private GameStateManager gsm;
+        private SpriteBatch batch;
+        
         @Override public void create()
             {
-                gameScreen = new GameScreen();
-                setScreen(gameScreen);
+                this.gsm = new GameStateManager();
+                this.batch = new SpriteBatch();
+    
+                this.gsm.push(new MapMatrix(this.gsm));
+            }
+    
+        @Override public void render()
+            {
+                this.gsm.update(Gdx.graphics.getDeltaTime());
+                this.gsm.render(this.batch);
             }
     
         @Override public void dispose()
             {
-                super.dispose();
-                gameScreen.dispose();
+                this.batch.dispose();
             }
     }

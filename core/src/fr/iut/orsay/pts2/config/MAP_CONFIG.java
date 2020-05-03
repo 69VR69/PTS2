@@ -1,4 +1,4 @@
-package fr.iut.orsay.pts2;
+package fr.iut.orsay.pts2.config;
 
 import com.badlogic.gdx.Gdx;
 
@@ -11,8 +11,8 @@ public abstract class MAP_CONFIG
     {
         //Constants
         public final static Random RND = new Random();
-        public final static int WIDTH = 10;
-        public final static int HEIGHT = 10;
+        public final static int WIDTH = 20;
+        public final static int HEIGHT = 20;
         public final static int TOLERANCE = 4;
         private final static int PERCENTGROUND = 70;
         private final static int PERCENTWATER = 10;
@@ -39,25 +39,9 @@ public abstract class MAP_CONFIG
                 while (x == null)
                     {
                         Element a = possibleElement[MAP_CONFIG.RND.nextInt(possibleElement.length)];
-                        if (getLuck(a.getElementType().getPercent()))
+                        if (Tools.getLuck(a.getElementType().getPercent()))
                             x = a;
                     }
                 return x;
-            }
-        
-        public static boolean getLuck(double coef)
-            {
-                if (coef < 0 || coef > 100)
-                    try
-                        {
-                            throw new Exception("coef is out of bounds");
-                        }
-                    catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                
-                double cursor = 100 * RND.nextDouble();
-                return (cursor >= 0 && cursor <= coef);
             }
     }
