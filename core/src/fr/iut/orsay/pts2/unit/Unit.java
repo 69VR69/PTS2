@@ -2,33 +2,51 @@ package fr.iut.orsay.pts2.unit;
 
 import com.badlogic.gdx.Gdx;
 
+import fr.iut.orsay.pts2.CONSTANT;
+
 import static fr.iut.orsay.pts2.Tools.getDistance;
 
-public abstract class unit {
+public abstract class Unit {
     protected int lvl=1;
     protected double hp;
     protected double dmg;
     protected int range;
     private int posX, posY;
+    private int weight;
 
-
-    public void toAttack(unit u1, unit u2) {
-        boolean isTouched = Gdx.input.isTouched();
-        if(isTouched && getDistance(u1, u2)<=range){
-            u2.setHp(u2.getHp()-u1.getDmg());
+    public void toAttack(Unit u1) {
+        boolean isTouched = Gdx.input.isTouched(); //TODO : préciser action de toucher l'écran
+        if(isTouched && getDistance(u1, this)<=range){
+            u1.setHp(u1.getHp()-this.getDmg());
+            this.setHp(this.getHp()-(u1.getDmg()/2.5));
         }
     }
     public void toEvolve() {
-        this.setHp(hp * 1.5);
-        this.setDmg(dmg * 1.5);
+        this.setHp(hp * CONSTANT.evolve);
+        this.setDmg(dmg * CONSTANT.evolve);
         this.setLvl(lvl+1);
     }
+    public void Move{
 
-    public static void display(unit u) {
-        System.out.println(u.getLvl());
-        System.out.println(u.getHp());
-        System.out.println(u.getDmg());
-        System.out.println(u.getRange());
+    }
+    @Override
+    public String toString() {
+        return "unit{" +
+                "lvl=" + lvl +
+                ", hp=" + hp +
+                ", dmg=" + dmg +
+                ", range=" + range +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                '}';
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     public int getLvl() {

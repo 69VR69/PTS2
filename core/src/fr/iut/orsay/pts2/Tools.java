@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import fr.iut.orsay.pts2.unit.Unit;
-import fr.iut.orsay.pts2.unit.unit;
 
 public abstract class Tools
     {
@@ -50,7 +49,7 @@ public abstract class Tools
             {
                 return Math.sqrt((civ2.getPosX() - civ1.getPosX()) ^ 2 + (civ2.getPosY() - civ1.getPosY()) ^ 2);
             }
-        public static double getDistance(unit u1, unit u2)
+        public static double getDistance(Unit u1, Unit u2)
         {
             return Math.sqrt((u2.getPosX() - u1.getPosX()) ^ 2 + (u2.getPosY() - u1.getPosY()) ^ 2);
         }

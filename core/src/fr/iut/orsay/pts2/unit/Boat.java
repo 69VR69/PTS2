@@ -1,11 +1,9 @@
 package fr.iut.orsay.pts2.unit;
 
-import com.badlogic.gdx.Gdx;
+public class Boat extends Unit {
 
-public class boat extends unit {
-
-
-    public boat() {
+//TODO : bâteau transporte troupes sur l'eau
+    public Boat() {
         hp = 5000;
         dmg = 300;
         range = 20;

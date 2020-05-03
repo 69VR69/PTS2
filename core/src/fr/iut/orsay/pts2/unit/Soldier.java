@@ -1,10 +1,8 @@
 package fr.iut.orsay.pts2.unit;
 
-import com.badlogic.gdx.Gdx;
+public class Soldier extends Unit {
 
-public class soldier extends unit {
-
-    public soldier() {
+    public Soldier() {
         hp = 3500;
         dmg = 150;
         range = 1;

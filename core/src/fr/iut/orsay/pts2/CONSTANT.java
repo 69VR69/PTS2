@@ -20,4 +20,11 @@ public abstract class CONSTANT
         //Tools
         public final static Random RND = new Random();
         public static final int NB_UNITTYPE = 2; //start to 0
+
+        //unit
+        public final static double evolve=1.5;
+
+        //ProductionDistrict
+        public final static double upMaxStock=1.5;
+        public final static double upTime = 0.9;
     }

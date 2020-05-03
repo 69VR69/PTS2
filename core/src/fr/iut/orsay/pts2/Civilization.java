@@ -23,17 +23,10 @@ public abstract class Civilization
                 this.buildings = buildings;
                 this.relationships = relationships;
                 this.units = new TreeMap<>();
-                this.addUnit(unit);
+
             }
         
-        public void addUnit(Unit... unit)
-            {
-                for (Unit u : unit)
-                    {
-                        test++;
-                        this.getUnits().put(u.getNbUnit() + 1, u);
-                    }
-            }
+
         
         public void addBuilding(Building... building)
             {
