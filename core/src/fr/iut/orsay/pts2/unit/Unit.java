@@ -14,19 +14,19 @@ public abstract class Unit {
     private int posX, posY;
     private int weight;
 
-    public void toAttack(Unit u1) {
+    public void attack(Unit u1) {
         boolean isTouched = Gdx.input.isTouched(); //TODO : préciser action de toucher l'écran
         if(isTouched && getDistance(u1, this)<=range){
             u1.setHp(u1.getHp()-this.getDmg());
             this.setHp(this.getHp()-(u1.getDmg()/2.5));
         }
     }
-    public void toEvolve() {
+    public void evolve() {
         this.setHp(hp * CONSTANT.evolve);
         this.setDmg(dmg * CONSTANT.evolve);
         this.setLvl(lvl+1);
     }
-    public void Move{
+    public void move{
 
     }
     @Override
