@@ -1,4 +1,4 @@
-package fr.iut.orsay.pts2;
+package fr.iut.orsay.pts2.buildings;
 
 public class Building
     {

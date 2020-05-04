@@ -1,27 +1,33 @@
 package fr.iut.orsay.pts2;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import fr.iut.orsay.pts2.gameManager.GameStateManager;
+import fr.iut.orsay.pts2.map.MapRender;
 
 public class GameLauncher extends ApplicationAdapter
     {
-        SpriteBatch batch;
-        Texture img;
+        private GameStateManager gsm;
+        private SpriteBatch batch;
         
         @Override public void create()
             {
-                //AI ai = new AI();
-                //System.out.println("Result: " + ai.Action());
+                this.gsm = new GameStateManager();
+                this.batch = new SpriteBatch();
+    
+                this.gsm.push(new MapRender(this.gsm));
             }
-        
+    
         @Override public void render()
             {
-            
+                this.gsm.update(Gdx.graphics.getDeltaTime());
+                this.gsm.render(this.batch);
             }
-        
+    
         @Override public void dispose()
             {
-            
+                this.batch.dispose();
             }
     }

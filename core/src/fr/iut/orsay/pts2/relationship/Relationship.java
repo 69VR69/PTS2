@@ -3,7 +3,7 @@ package fr.iut.orsay.pts2.relationship;
 import java.util.ArrayList;
 
 import fr.iut.orsay.pts2.Civilization;
-import fr.iut.orsay.pts2.Ressource;
+import fr.iut.orsay.pts2.ressource.Ressource;
 
 public class Relationship
     {
