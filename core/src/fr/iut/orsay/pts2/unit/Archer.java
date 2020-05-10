@@ -7,6 +7,7 @@ public class Archer extends Unit {
         hp = 2000;
         dmg = 180;
         range = 15;
+        add(this);
     }
 
     @Override
@@ -22,5 +23,6 @@ public class Archer extends Unit {
     public static void main(String[] args) {
         Archer a=new Archer();
         System.out.println(a.toString());
+
     }
 }

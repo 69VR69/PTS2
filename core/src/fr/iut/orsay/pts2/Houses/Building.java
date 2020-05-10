@@ -1,13 +1,35 @@
 package fr.iut.orsay.pts2.Houses;
 
-public abstract class Building {
+import java.util.ArrayList;
+
+import fr.iut.orsay.pts2.unit.Placable;
+
+public abstract class Building implements Placable {
         protected int price;
         protected int time;
         protected int level=1;
         private String name;
         private String description;
+        private int posX,posY;
+        protected static ArrayList<Building> buildings=new ArrayList<>();
 
-        public int getPrice() {
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public int getPrice() {
             return price;
         }
 
