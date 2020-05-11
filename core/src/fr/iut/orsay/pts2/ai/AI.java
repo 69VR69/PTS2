@@ -1,20 +1,10 @@
 package fr.iut.orsay.pts2.ai;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import fr.iut.orsay.pts2.Civilization;
-import fr.iut.orsay.pts2.buildings.Building;
-import fr.iut.orsay.pts2.config.CONSTANT;
-import fr.iut.orsay.pts2.config.Tools;
-import fr.iut.orsay.pts2.relationship.Relationship;
-import fr.iut.orsay.pts2.unit.Boat;
-import fr.iut.orsay.pts2.unit.Soldier;
-import fr.iut.orsay.pts2.unit.Unit;
 
 public class AI extends Civilization
     {
-        public AI(String name, String description, Unit unit, ArrayList<Building> buildings, ArrayList<Relationship> relationships)
+      /*  public AI(String name, String description, Unit unit, ArrayList<Building> buildings, ArrayList<Relationship> relationships)
             {
                 super(name, description, unit, buildings, relationships);
             }
@@ -97,14 +87,14 @@ public class AI extends Civilization
         
         private void Units()
             {
-    
+            
             }
-    
+        
         private void Technology()
             {
                 System.out.println("technology");
             }
-    
+        
         private Building needRessource()//TODO: change stock by rate + add this.getBuildings().      getRessourceDistrict        .get(0)
         {
             Building temp = this.getBuildings().get(0);
@@ -123,7 +113,7 @@ public class AI extends Civilization
                 Unit[] units = {new Boat("Boat"), new Soldier("Soldier"), new Soldier("Soldier")};
                 ArrayList<Unit> listOfUnits = new ArrayList<>(Arrays.asList(units));
                 Unit newUnit;
-    
+                
                 if (isWar())
                     {
                         Civilization targetCiv = (Civilization) Tools.chooseBetween((Object) listCiv().toArray(new Civilization[0]));
@@ -150,25 +140,24 @@ public class AI extends Civilization
                         //TODO: create this unit (newUnit)
                     }
             }
-    
+        
         private void moveUnit()
             {
                 if (isWar())
                     {
-                        warMovement(this.listCivByRelationship('W').toArray(new Civilization[0]));
+                        //warMovement(this.listCivByRelationship('W').toArray(new Civilization[0]));
                     }
                 else
                     {
                         safeMovement();
                     }
             }
-    
-        private void safeMovement()
-            {
-                Unit uTest = new Soldier("Jean");
-                if (true/*une troupe viens d'être créer*/)
+        
+        private void safeMovement() {
+               // Unit uTest = new Soldier("Jean");
+                if (true/*une troupe viens d'être créer)
                     {
-                        while (!uTest.nextBorder(CONSTANT.WILDLAND))
+                       /* while (!uTest.nextBorder(CONSTANT.WILDLAND))
                             {
                                 int nextPos = (int) Tools.chooseBetween(1, 2, 3, 4, 5, 6, 7, 8);
                                 switch (nextPos)
@@ -207,13 +196,13 @@ public class AI extends Civilization
                                             {
                                                 if (u.moveOn(CONSTANT.WILDLAND))
                                                     break;
-                                            
+                                                
                                             }
                                     }
                             }
                     }
             }
-    
+        
         private void warMovement(Civilization... civilizations)
             {
                 /*
@@ -224,19 +213,19 @@ public class AI extends Civilization
                             "chevalier": 5
                             }
 
-                    def __init__(self, ennemyNumber, x, y):
+                    def __init__(self, ennemyNumber, x, y): contructeur
                         """
                             parameter:
                             ennemyNumber: dict of ennemy number
                             example:
-                            {"archer": 3, "soldat": 2}
+                            {"archer": 3, "soldat": 2}²
                         """
                         self.weight = self._initWeight(ennemyNumber)
                         self.x = x
                         self.y = y
                         self.depressionRate = 0.2
     
-                    def _initWeight(self, ennemyNumber):
+                    def _initWeight(self, ennemyNumber): methode private
                         weight = 0
 
                         for types, number in ennemyNumber.items():
@@ -252,14 +241,13 @@ public class AI extends Civilization
                         self.board = [[0 for x in range(width)] for y in range(height)]
     
                     def getTacticalBoard(self, ennemies):
-                        output = [[0 for x in range(self.width)] for y in range(self.height)]
+                        output = [[0 for x in range(self.width)] for y in range(self.height)] rempli tableau 2D de 0
 
                         for ennemi in ennemies:
                             for y in range(self.height):
                                 for x in range(self.width):
                                     deltaX, deltaY = abs(ennemi.x - x), abs(ennemi.y - y)
                                     output[y][x] += ennemi.weight - (ennemi.weight * (deltaX + deltaY) * ennemi.depressionRate)
-        
                     return output
     
                 @staticmethod
@@ -268,7 +256,6 @@ public class AI extends Civilization
                             for element in line:
                                 print("{:5}".format(round(element, 2)), end=" ")
                                 print()
-        
     
                class Game:
 
@@ -281,6 +268,6 @@ public class AI extends Civilization
                         board = Board(10, 10)
 
                 Board.displayBoard(board.getTacticalBoard([test, test2]))
-                */
-            }
+                
+            }*/
     }

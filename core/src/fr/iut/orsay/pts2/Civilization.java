@@ -1,15 +1,8 @@
 package fr.iut.orsay.pts2;
 
-import java.util.ArrayList;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
-import fr.iut.orsay.pts2.relationship.Relationship;
-import fr.iut.orsay.pts2.unit.Unit;
-
 public abstract class Civilization
     {
-        private final String name, description;
+        /*private final String name, description;
         private ArrayList<Building> buildings;
         private ArrayList<Relationship> relationships;
         SortedMap<Integer, Unit> units;
@@ -110,5 +103,5 @@ public abstract class Civilization
         public void setPosY(int posY)
             {
                 this.posY = posY;
-            }
+            }*/
     }
