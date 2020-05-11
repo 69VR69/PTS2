@@ -3,9 +3,7 @@ package fr.iut.orsay.pts2.Houses;
 import java.util.HashMap;
 
 import fr.iut.orsay.pts2.CONSTANT;
-import fr.iut.orsay.pts2.ressources.Ressource;
-
-import static java.lang.Thread.sleep;
+import fr.iut.orsay.pts2.ressource.Ressource;
 
 public class ProductionDistrict extends Building {
     protected int maxStock=200;

@@ -1,7 +1,7 @@
 package fr.iut.orsay.pts2.Houses;
 
 
-import fr.iut.orsay.pts2.ressources.Ore;
+import fr.iut.orsay.pts2.ressource.Ore;
 
 public class OreHouse extends ProductionDistrict {
 

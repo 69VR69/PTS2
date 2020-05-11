@@ -1,6 +1,6 @@
 package fr.iut.orsay.pts2.Houses;
 
-import fr.iut.orsay.pts2.ressources.Wood;
+import fr.iut.orsay.pts2.ressource.Wood;
 
 public class WoodHouse extends ProductionDistrict {
     Wood w=new Wood();

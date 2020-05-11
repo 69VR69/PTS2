@@ -1,6 +1,6 @@
 package fr.iut.orsay.pts2.Houses;
 
-import fr.iut.orsay.pts2.ressources.Food;
+import fr.iut.orsay.pts2.ressource.Food;
 
 public class FoodHouse extends ProductionDistrict {
 

@@ -5,10 +5,12 @@ import com.badlogic.gdx.Gdx;
 import java.util.ArrayList;
 
 import fr.iut.orsay.pts2.CONSTANT;
+import fr.iut.orsay.pts2.interfaces.Placeable;
 
 import static fr.iut.orsay.pts2.Tools.getDistance;
 
-public abstract class Unit implements Placable {
+public abstract class Unit implements Placeable
+    {
     protected int lvl=1;
     protected double hp;
     protected double dmg;

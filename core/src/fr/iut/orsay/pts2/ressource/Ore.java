@@ -1,4 +1,4 @@
-package fr.iut.orsay.pts2.ressources;
+package fr.iut.orsay.pts2.ressource;
 
 
 public class Ore extends Ressource {

@@ -2,9 +2,10 @@ package fr.iut.orsay.pts2.Houses;
 
 import java.util.ArrayList;
 
-import fr.iut.orsay.pts2.unit.Placable;
+import fr.iut.orsay.pts2.interfaces.Placeable;
 
-public abstract class Building implements Placable {
+public abstract class Building implements Placeable
+    {
         protected int price;
         protected int time;
         protected int level=1;
