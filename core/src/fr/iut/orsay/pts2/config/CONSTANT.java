@@ -1,5 +1,7 @@
 package fr.iut.orsay.pts2.config;
 
+import com.badlogic.gdx.Gdx;
+
 import java.util.Random;
 
 public abstract class CONSTANT
@@ -24,4 +26,7 @@ public abstract class CONSTANT
         //Tools
         public final static Random RND = new Random();
         public final static int NB_UNITTYPE = 2; //start to 0
+    
+        public final static int screenwidth = Gdx.graphics.getWidth(), screenHeight = Gdx.graphics.getHeight();
+        public final static int textureWidth = screenwidth / MAP_CONFIG.WIDTH, textureHeight = screenHeight / MAP_CONFIG.HEIGHT;
     }
