@@ -40,10 +40,12 @@ public abstract class Unit implements Placeable
             return this.posY==Gdx.input.getY()&&this.posX==Gdx.input.getX();
     }
 
-    public boolean occupied(int positionX, int positionY){
+   /* public boolean occupied(int positionX, int positionY){
         //TODO: faire array des tous les buildings et troupes et parcourir les arrays pour comparer les positions
-        if(positionX==)
-    }
+        /*if(positionX==a){
+
+        }
+    }*/
 
     public void move(int posX, int posY){
         boolean hudMove=true; //TODO: replace by button "Move"

@@ -6,6 +6,16 @@ import fr.iut.orsay.pts2.interfaces.Upgradable;
 
 public abstract class Unit implements Fighteable, Moveable, Upgradable {
 
+    protected int level =1;
+    protected int hp;
+    protected int hpMax;
+    protected int range;
+    protected int expMax;
+    protected int exp;
+    private int posX,posY;
+
+
+
     @Override
     public boolean canAttack() {
         return false;
