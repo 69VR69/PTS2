@@ -1,10 +1,6 @@
 package fr.iut.orsay.pts2.interfaces;
 
-import java.util.HashMap;
-
-import fr.iut.orsay.pts2.ressource.Ressource;
-
-public interface TODO
+public// interface TODO
     {
         //TODO: implementer le tableau suivant dans le batiment de production = cité (troupes,baitments...) + classe Cost
         /*
