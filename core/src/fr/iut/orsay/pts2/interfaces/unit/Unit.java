@@ -1,20 +1,12 @@
 package fr.iut.orsay.pts2.interfaces.unit;
 
+import com.badlogic.gdx.Gdx;
+
 import fr.iut.orsay.pts2.interfaces.Fighteable;
 import fr.iut.orsay.pts2.interfaces.Moveable;
 import fr.iut.orsay.pts2.interfaces.Upgradable;
 
 public abstract class Unit implements Fighteable, Moveable, Upgradable {
-
-    protected int level =1;
-    protected int hp;
-    protected int hpMax;
-    protected int range;
-    protected int expMax;
-    protected int exp;
-    private int posX,posY;
-
-
 
     @Override
     public boolean canAttack() {
@@ -43,6 +35,13 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable {
 
     @Override
     public boolean move(int x, int y) {
+        boolean hudMove = true; //TODO: replace by button "Move"
+        //TODO: faire array des tous les buildings et troupes et parcourir les arrays pour comparer les positions
+        if (hudMove && !this.occupied(Gdx.input.getX(), Gdx.input.getY()))
+            {
+                this.setPosX(posX);
+                this.setPosY(posY);
+            }
         return false;
     }
 

@@ -12,4 +12,6 @@ public interface Moveable extends Placeable
         void addForbiddenZone(Object... o);
         
         void removeForbiddenZone(Object... o);
+    
+    
     }

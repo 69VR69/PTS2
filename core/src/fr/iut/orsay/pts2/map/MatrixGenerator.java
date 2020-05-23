@@ -8,7 +8,7 @@ class MatrixGenerator implements Cloneable
         private int height = MAP_CONFIG.HEIGHT;
         private Element[][] mapContent;
         private int totalAdded = 0;
-
+    
         MatrixGenerator()
             {
                 this.totalAdded = getHeight() * getWidth();
