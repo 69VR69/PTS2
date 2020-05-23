@@ -5,6 +5,7 @@ public class Element implements Cloneable
         private ElementType elementType;
         private int locationW;
         private int locationH;
+        private boolean check;
         
         public Element(ElementType elementType)
             {

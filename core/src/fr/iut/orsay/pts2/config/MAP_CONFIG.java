@@ -39,7 +39,7 @@ public abstract class MAP_CONFIG
                 while (x == null)
                     {
                         Element a = possibleElement[MAP_CONFIG.RND.nextInt(possibleElement.length)];
-                        if (Tools.getLuck(a.getElementType().getPercent()))
+                        //if (Tools.getLuck(a.getElementType().getPercent()))
                             x = a;
                     }
                 return x;

@@ -1,12 +1,21 @@
 package fr.iut.orsay.pts2.unit;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import fr.iut.orsay.pts2.interfaces.Fighteable;
 import fr.iut.orsay.pts2.interfaces.Moveable;
 import fr.iut.orsay.pts2.interfaces.Upgradable;
 
 public abstract class Unit implements Fighteable, Moveable, Upgradable
     {
-        
+        private FileHandle texturePath= Gdx.files.internal("badlogic.jpg");
+
+        public void draw(SpriteBatch batchUnit){
+            batchUnit.begin();
+            batchUnit.draw(new Texture(texturePath), posX, posY);
+            batchUnit.end();
+        }
         @Override public boolean canAttack()
             {
                 return false;

@@ -27,6 +27,7 @@ public class GameLauncher extends Game
             {
                 this.gsm = new GameStateManager();
                 this.batch = new SpriteBatch();
+
                 fps = new Label("fps:", new Label.LabelStyle(new BitmapFont(), Color.LIME));
                 fps.setAlignment(Align.topLeft);
                 

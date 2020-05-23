@@ -13,8 +13,10 @@ import fr.iut.orsay.pts2.gameManager.GameState;
 import fr.iut.orsay.pts2.gameManager.GameStateManager;
 import fr.iut.orsay.pts2.hud.HUD;
 
+
 public class MapRender extends GameState
     {
+        private SpriteBatch batchUnit;
         private MatrixGenerator mapMatrix;
         private HUD hud;
         private HashMap<Element, Texture> map;
@@ -25,6 +27,7 @@ public class MapRender extends GameState
                 super(gsm);
                 this.hud = new HUD(gsm);
                 this.hudBatch = new SpriteBatch();
+                this.batchUnit=new SpriteBatch();
                 this.mapMatrix = new MatrixGenerator();
                 this.map = new HashMap<>();
                 this.setupMatrixTexture();
