@@ -1,9 +1,6 @@
-package fr.iut.orsay.pts2;
+package fr.iut.orsay.pts2.config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import fr.iut.orsay.pts2.unit.Unit;
 
 public abstract class Tools
     {
@@ -33,7 +30,7 @@ public abstract class Tools
                 return values.get(CONSTANT.RND.nextInt(values.size()));
             }
     
-        public static Building chooseBetween(Building... building)
+       /* public static Building chooseBetween(Building... building)
             {
                 ArrayList<Building> values = new ArrayList<>(Arrays.asList(building));
                 return values.get(CONSTANT.RND.nextInt(values.size()));
@@ -52,5 +49,5 @@ public abstract class Tools
         public static double getDistance(Unit u1, Unit u2)
         {
             return Math.sqrt((u2.getPosX() - u1.getPosX()) ^ 2 + (u2.getPosY() - u1.getPosY()) ^ 2);
-        }
+        }*/
     }

@@ -1,122 +1,109 @@
 package fr.iut.orsay.pts2.unit;
 
-import com.badlogic.gdx.Gdx;
+import fr.iut.orsay.pts2.interfaces.Fighteable;
+import fr.iut.orsay.pts2.interfaces.Moveable;
+import fr.iut.orsay.pts2.interfaces.Upgradable;
 
-import java.util.ArrayList;
-
-import fr.iut.orsay.pts2.CONSTANT;
-import fr.iut.orsay.pts2.interfaces.Placeable;
-
-import static fr.iut.orsay.pts2.Tools.getDistance;
-
-public abstract class Unit implements Placeable
+public abstract class Unit implements Fighteable, Moveable, Upgradable
     {
-    protected int lvl=1;
-    protected double hp;
-    protected double dmg;
-    protected int range;
-    private int posX, posY;
-    private int weight;
-    private float depressionRate;
-    private static ArrayList<Unit> units=new ArrayList<>();
+        
+        @Override public boolean canAttack()
+            {
+                return false;
+            }
+        
+        @Override public void attack(Object o)
+            {
 
-    public void add(Unit u1){
-        units.add(u1);
     }
+        
+        @Override public int calculDamage(int damage, Object o)
+            {
+                return 0;
+    }
+        
+        @Override public void upModification(int upValue, Object o)
+            {
 
-    public void attack(Unit u1) {
-        if(selectUnit()&& getDistance(u1, this)<=range){
-            u1.setHp(u1.getHp()-this.getDmg());
-            this.setHp(this.getHp()-(u1.getDmg()/2.5));
-        }
     }
-    public void evolve() {
-        this.setHp(hp * CONSTANT.evolve);
-        this.setDmg(dmg * CONSTANT.evolve);
-        this.setLvl(lvl+1);
-    }
-
-    public boolean selectUnit(){
-            return this.posY==Gdx.input.getY()&&this.posX==Gdx.input.getX();
-    }
-
-    public boolean occupied(int positionX, int positionY){
-        //TODO: faire array des tous les buildings et troupes et parcourir les arrays pour comparer les positions
-        if(positionX==)
+        
+        @Override public void downModification(int downValue, Object o)
+            {
+            
+            }
+        
+        @Override public boolean move(int x, int y)
+            {
+                return false;
     }
 
-    public void move(int posX, int posY){
-        boolean hudMove=true; //TODO: replace by button "Move"
-        if(hudMove && !this.occupied(Gdx.input.getX(),Gdx.input.getY())){
-            this.setPosX(posX);
-            this.setPosY(posY);
-        }
-    }
-    @Override
-    public String toString() {
-        return "unit{" +
-                "lvl=" + lvl +
-                ", hp=" + hp +
-                ", dmg=" + dmg +
-                ", range=" + range +
-                ", posX=" + posX +
-                ", posY=" + posY +
-                '}';
-    }
+    @Override public void addForbiddenZone(Object... o)
+        {
 
-    public int getWeight() {
-        return weight;
     }
+        
+        @Override public void removeForbiddenZone(Object... o)
+            {
 
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
-
-    public int getLvl() {
-        return lvl;
+        
+        @Override public boolean addToBoard(int posX, int posY, int weight, float depressionRate)
+            {
+                return false;
     }
-
-    public void setLvl(int lvl) {
-        this.lvl = lvl;
+        
+        @Override public boolean changePosition(int posX, int posY)
+            {
+                return false;
     }
-
-    public double getHp() {
-        return hp;
+        
+        @Override public boolean swapPosition(Object o1, Object o2)
+            {
+                return false;
     }
-
-    public void setHp(double hp) {
-        this.hp = hp;
+        
+        @Override public boolean removeFromBoard()
+            {
+                return false;
     }
+        
+        @Override public void upDepressionRate(float upRate)
+            {
 
-    public double getDmg() {
-        return dmg;
     }
+        
+        @Override public void downDepressionRate(float downRate)
+            {
 
-    public void setDmg(double dmg) {
-        this.dmg = dmg;
     }
+        
+        @Override public void upWeight(int upValue)
+            {
 
-    public int getRange() {
-        return range;
     }
+        
+        @Override public void downWeight(int downValue)
+            {
 
-    public void setRange(int range) {
-        this.range = range;
     }
+        
+        @Override public void upLevel(int nbLevel)
+            {
 
-    public int getPosX() {
-        return posX;
     }
+        
+        @Override public void downLevel(int nbLevel)
+            {
 
-    public void setPosX(int posX) {
-        this.posX = posX;
     }
+        
+        @Override public void addExperiencePoint(int point)
+            {
 
-    public int getPosY() {
-        return posY;
     }
+        
+        @Override public void removeExperiencePoint(int point)
+            {
 
-    public void setPosY(int posY) {
-        this.posY = posY;
     }
 }

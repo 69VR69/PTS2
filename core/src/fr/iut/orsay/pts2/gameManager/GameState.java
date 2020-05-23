@@ -19,6 +19,8 @@ public abstract class GameState
         public abstract void update(float dt);
         
         public abstract void render(SpriteBatch batch);
+    
+        public abstract void resize(int width, int height);
         
         public abstract void dispose();
     }

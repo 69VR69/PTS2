@@ -33,4 +33,9 @@ public class GameStateManager
             {
                 this.gameStates.peek().render(batch);
             }
+    
+        public void resize(int width, int height)
+            {
+                this.gameStates.peek().resize(width, height);
+            }
     }
