@@ -14,7 +14,7 @@ class MatrixGenerator implements Cloneable
                 this.totalAdded = getHeight() * getWidth();
                 this.mapContent = new Element[this.width][this.height];
                 this.RandomSeed();
-                this.printMatrix();
+                //this.printMatrix();
                 //this.getPosition();
             }
         

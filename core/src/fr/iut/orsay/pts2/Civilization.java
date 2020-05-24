@@ -7,8 +7,6 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import fr.iut.orsay.pts2.buildings.Building;
-import fr.iut.orsay.pts2.relationship.Relationship;
 import fr.iut.orsay.pts2.unit.Unit;
 
 public abstract class Civilization
@@ -50,7 +48,7 @@ public abstract class Civilization
                 SortedSet<Integer> values = new TreeSet<>(this.getUnitQuantity().values());
             }
         
-        public void addBuilding(Building... building)
+        /*public void addBuilding(Building... building)
             {
                 for (Building b : building)
                     this.getBuildings().add(b);
@@ -101,8 +99,8 @@ public abstract class Civilization
                             civList.add(r.getCiv1());
                     }
                 return civList;
-            }
-    
+            }*/
+        
         public Unit mostTroop()
             {
                 Unit result = null;
@@ -147,7 +145,7 @@ public abstract class Civilization
                 this.unitQuantity = unitQuantity;
             }
         
-        public ArrayList<Building> getBuildings()
+        /*public ArrayList<Building> getBuildings()
             {
                 return buildings;
             }
@@ -165,8 +163,8 @@ public abstract class Civilization
         public void setRelationships(ArrayList<Relationship> relationships)
             {
                 this.relationships = relationships;
-            }
-    
+            }*/
+        
         public int getPosX()
             {
                 return posX;

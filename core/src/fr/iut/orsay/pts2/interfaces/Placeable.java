@@ -22,4 +22,16 @@ public interface Placeable
         void upWeight(int upValue);
         
         void downWeight(int downValue);
+    
+        float getPosX();
+    
+        void setPosX(float x);
+    
+        float getPosY();
+    
+        void setPosY(float y);
+    
+        boolean isOnBoard();
+    
+        void setOnBoard(boolean board);
     }

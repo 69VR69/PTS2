@@ -3,7 +3,6 @@ package fr.iut.orsay.pts2.interfaces;
 import java.util.HashMap;
 
 
-
 public interface Fighteable extends Placeable
     {
         HashMap<Object, Integer> modificationTable = new HashMap<>();
@@ -12,7 +11,7 @@ public interface Fighteable extends Placeable
         boolean canAttack();
         
         void attack(Object o);
-
+    
         int calculDamage(int damage, Object o);
         
         void upModification(int upValue, Object o);
