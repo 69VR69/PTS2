@@ -17,7 +17,7 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
         private String name;
         private float posX = 0, posY = 0;
         private FileHandle texturePath = Gdx.files.internal("badlogic.jpg");
-        private boolean onBoard = false;
+        private boolean onBoard = true;
         private boolean isMoving = false;
     
         public Unit(String name, float posX, float posY)
