@@ -35,7 +35,7 @@ public abstract class Civilization
                     {
                         if (this.getUnitQuantity().containsKey(u.getName()))
                             {
-                                this.getUnitQuantity().replace(u.getName(), this.getUnitQuantity().get(u.getName()) + 1);
+                               // this.getUnitQuantity().replace(u.getName(), this.getUnitQuantity().get(u.getName()) + 1);
                                 this.getUnitList().add(u);
                             }
                         else

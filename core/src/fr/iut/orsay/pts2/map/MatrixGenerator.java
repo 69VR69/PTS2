@@ -1,5 +1,6 @@
 package fr.iut.orsay.pts2.map;
 
+//import fr.iut.orsay.pts2.InputProcessor;
 import fr.iut.orsay.pts2.config.MAP_CONFIG;
 
 class MatrixGenerator implements Cloneable
@@ -8,6 +9,7 @@ class MatrixGenerator implements Cloneable
         private int height = MAP_CONFIG.HEIGHT;
         private Element[][] mapContent;
         private int totalAdded = 0;
+      //  private InputProcessor ip;
     
         MatrixGenerator()
             {
@@ -16,8 +18,8 @@ class MatrixGenerator implements Cloneable
                 this.RandomSeed();
                 //this.printMatrix();
                 //this.getPosition();
+
             }
-        
         private void RandomSeed()
             {
                 for (int h = 0; h < this.getHeight(); h++)

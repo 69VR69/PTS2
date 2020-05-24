@@ -1,5 +1,7 @@
 package fr.iut.orsay.pts2.map;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.iut.orsay.pts2.InputProcessor;
+//import fr.iut.orsay.pts2.InputProcessor;
 import fr.iut.orsay.pts2.config.CONSTANT;
 import fr.iut.orsay.pts2.config.MAP_CONFIG;
 import fr.iut.orsay.pts2.config.Tools;
@@ -19,7 +21,7 @@ import fr.iut.orsay.pts2.unit.Archer;
 import fr.iut.orsay.pts2.unit.Unit;
 
 
-public class MapRender extends GameState
+public class MapRender extends GameState implements InputProcessor
     {
         private HashMap<Object, ArrayList<Cost>> productionList;
         private SpriteBatch batchUnit;
@@ -27,12 +29,13 @@ public class MapRender extends GameState
         private HUD hud;
         private HashMap<Element, Texture> map;
         private SpriteBatch hudBatch;
-        private InputProcessor input;
+        private Unit unit;
+
         
         public MapRender(GameStateManager gsm)
             {
                 super(gsm);
-                input = new InputProcessor();
+               // input = new InputProcessor();
                 this.hud = new HUD(gsm);
                 this.hudBatch = new SpriteBatch();
                 this.batchUnit = new SpriteBatch();
@@ -47,7 +50,7 @@ public class MapRender extends GameState
     
         @Override protected void handleInput()
             {
-                if () //input j'ai une variable
+               // if () //input j'ai une variable
                     hud.handleInput();
             }
     
@@ -57,9 +60,11 @@ public class MapRender extends GameState
                     {
                         Object o = ee.getKey();
                         if (o instanceof Unit)
+
                             if (((Unit) o).isMoving())
                                 {
                                     ((Unit) o).move(0, 3);
+
                                 }
                     }
                 hud.update(dt);
@@ -94,11 +99,12 @@ public class MapRender extends GameState
                                 }
                     }
                 batchUnit.end();
-    
+
                 //Hud
                 hud.render(hudBatch);
             }
-    
+
+
         @Override public void resize(int width, int height)
             {
             
@@ -120,6 +126,47 @@ public class MapRender extends GameState
                             map.put(e, t);
                         }
             }
-        
-        
+
+
+        @Override
+        public boolean keyDown(int keycode) {
+            return false;
+        }
+
+        @Override
+        public boolean keyUp(int keycode) {
+            return false;
+        }
+
+        @Override
+        public boolean keyTyped(char character) {
+            return false;
+        }
+
+        @Override
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+            return false;
+        }
+
+
+        @Override
+        public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+            return false;
+        }
+
+        @Override
+        public boolean touchDragged(int screenX, int screenY, int pointer) {
+            return false;
+        }
+
+        @Override
+        public boolean mouseMoved(int screenX, int screenY) {
+            return false;
+        }
+
+        @Override
+        public boolean scrolled(int amount) {
+            return false;
+        }
     }

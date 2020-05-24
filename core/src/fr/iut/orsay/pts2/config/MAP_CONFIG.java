@@ -11,8 +11,8 @@ public abstract class MAP_CONFIG
     {
         //Constants
         public final static Random RND = new Random();
-        public final static int WIDTH = 4; //1 2 4 5 8 10 16 20 32 40 80
-        public final static int HEIGHT = 4;
+        public final static int WIDTH = 16; //1 2 4 5 8 10 16 20 32 40 80
+        public final static int HEIGHT = 16;
         public final static int TOLERANCE = 4;
         private final static int PERCENTGROUND = 70;
         private final static int PERCENTWATER = 10;

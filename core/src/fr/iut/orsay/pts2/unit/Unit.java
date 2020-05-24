@@ -1,8 +1,11 @@
 package fr.iut.orsay.pts2.unit;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
 import java.util.Arrays;
 
@@ -11,12 +14,13 @@ import fr.iut.orsay.pts2.interfaces.Moveable;
 import fr.iut.orsay.pts2.interfaces.Upgradable;
 
 import static com.badlogic.gdx.Gdx.graphics;
+import static com.badlogic.gdx.Gdx.input;
 
-public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparable<Unit>
+public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparable<Unit>, InputProcessor
     {
         private String name;
         private float posX = 0, posY = 0;
-        private FileHandle texturePath = Gdx.files.internal("badlogic.jpg");
+        private FileHandle texturePath = Gdx.files.internal("data/sheitan-valorant.png");
         private boolean onBoard = true;
         private boolean isMoving = false;
     
@@ -25,8 +29,28 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
                 this.name = name;
                 this.posX = posX;
                 this.posY = posY;
+                //System.out.println("ok");
+                Gdx.input.setInputProcessor(this);
+                move(5,5);
             }
-    
+
+        @Override
+        public boolean keyDown(int keycode) {
+
+
+            return false;
+        }
+
+        @Override
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+            System.out.println("ok");
+
+                move(screenX,screenY);
+
+            return false;
+        }
+
         public Texture texturize()
             {
                 return new Texture(texturePath);
@@ -113,6 +137,7 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
         
         @Override public boolean removeFromBoard()
             {
+                this.onBoard =false;
                 return false;
             }
         
