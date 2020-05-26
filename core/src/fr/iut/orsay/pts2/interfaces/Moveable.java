@@ -6,8 +6,8 @@ public interface Moveable extends Placeable
     {
         ArrayList<Object> forbiddenZone = new ArrayList<>();
         int moveLimit = 1;
-        
-        boolean move(int x, int y); //if (!forbiddenZone)
+    
+        boolean move(float x, float y);
         
         void addForbiddenZone(Object... o);
         

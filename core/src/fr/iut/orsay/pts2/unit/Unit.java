@@ -1,12 +1,8 @@
 package fr.iut.orsay.pts2.unit;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
 import java.util.Arrays;
 
@@ -15,28 +11,28 @@ import fr.iut.orsay.pts2.interfaces.Moveable;
 import fr.iut.orsay.pts2.interfaces.Upgradable;
 
 import static com.badlogic.gdx.Gdx.graphics;
-import static com.badlogic.gdx.Gdx.input;
 
 public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparable<Unit>
     {
         private String name;
         private float posX = 0, posY = 0;
+        private int range = 1;
         private FileHandle texturePath = Gdx.files.internal("data/sheitan-valorant.png");
         private boolean onBoard = true;
         private boolean isMoving = false;
-
+    
         public Unit(String name, float posX, float posY)
             {
-
+    
                 this.name = name;
                 this.posX = posX;
                 this.posY = posY;
                 //System.out.println("ok");
-
-                move(5,5);
-
+    
+                move(5, 5);
+                
             }
-
+    
         public Texture texturize()
             {
                 return new Texture(texturePath);
@@ -67,43 +63,34 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
             
             }
     
-        @Override public boolean move(int xDestination, int yDestination)
+        @Override public boolean move(float xDestination, float yDestination)
             {
-               setMoving(true);
-                System.out.println(this.getPosX() + ""+this.getPosY());
-                int speed = 2;
+                setMoving(true);
+                System.out.println(this.getPosX() + "" + this.getPosY());
                 try
                     {
-                        if (xDestination > this.getPosX()) {
-                            this.setPosX(this.getPosX() + (int) graphics.getDeltaTime() * speed);
-                            System.out.println("et maintenant " + this.getPosX() + "" + this.getPosY());
-                        }
+                        if (xDestination > this.getPosX())
+                            this.setPosX(this.getPosX() + (int) graphics.getDeltaTime());
                         else if (xDestination < this.getPosX())
-                            this.setPosX(this.getPosX() - (int) graphics.getDeltaTime() * speed);
-                        if (Math.abs(xDestination - this.getPosX()) < Gdx.graphics.getDeltaTime() * speed)
-                            {
-                                if (yDestination > this.getPosY()) {
-                                    this.setPosY(this.getPosY() + (int) graphics.getDeltaTime() * speed);
-                                    System.out.println("et maintenant " + this.getPosX() + ""+this.getPosY());
+                            this.setPosX(this.getPosX() - (int) graphics.getDeltaTime());
+                        if (Math.abs(xDestination - this.getPosX()) < Gdx.graphics.getDeltaTime())
+                            if (yDestination > this.getPosY())
+                                {
+                                    this.setPosY(this.getPosY() + (int) graphics.getDeltaTime());
                                 }
-                                else if (yDestination < this.getPosY()) {
-                                    this.setPosY(this.getPosY() - (int) graphics.getDeltaTime() * speed);
-                                    System.out.println("et maintenant " + this.getPosX() + ""+this.getPosY());
-
+                            else if (yDestination < this.getPosY())
+                                {
+                                    this.setPosY(this.getPosY() - (int) graphics.getDeltaTime());
                                 }
-                            }
+    
                         setMoving(false);
+                        return true;
                     }
                 catch (Exception e)
                     {
                         System.err.println("Error:" + Arrays.toString(e.getStackTrace()));
                         return false;
                     }
-                finally
-                    {
-                        return true;
-                    }
-
             }
     
     
@@ -134,7 +121,7 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
         
         @Override public boolean removeFromBoard()
             {
-                this.onBoard =false;
+                this.onBoard = false;
                 return false;
             }
         
@@ -232,5 +219,10 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
         public void setMoving(boolean moving)
             {
                 isMoving = moving;
+            }
+    
+        public int getRange()
+            {
+                return range;
             }
     }
