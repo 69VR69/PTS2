@@ -7,7 +7,7 @@ public class Archer extends Unit
                 super(name, posX, posY);
             }
 
-        @Override
+    /*    @Override
         public boolean keyDown(int keycode) {
 
             return false;
@@ -46,6 +46,6 @@ public class Archer extends Unit
         @Override
         public boolean scrolled(int amount) {
             return false;
-        }
+        }*/
 
     }

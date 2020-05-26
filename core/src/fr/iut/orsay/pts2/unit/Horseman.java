@@ -7,7 +7,7 @@ public class Horseman extends Unit
                 super(name, posX, posY);
             }
 
-        @Override
+        /*@Override
         public boolean keyDown(int keycode) {
 
             return false;
@@ -47,5 +47,5 @@ public class Horseman extends Unit
         public boolean scrolled(int amount) {
             return false;
         }
-
+*/
     }

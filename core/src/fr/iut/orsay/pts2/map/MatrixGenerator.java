@@ -153,11 +153,13 @@ class MatrixGenerator implements Cloneable
                     }
             }
         
-        private void getPosition()
-            {
-                for (Element[] elements : mapContent)
-                    for (Element element : elements)
-                        System.out.println(element.getLocationW() + " : " + element.getLocationH());
+        public int getThisPositionX(int posX,int posY)
+        {
+                 return mapContent[posX][posY].getLocationW();
+
+        }
+            public int getPositionY(int posX,int posY){
+              return mapContent[posX][posY].getLocationH();
             }
         
         private void setElementAtThisPosition(int elementWidth, int elementHeight, Element element)

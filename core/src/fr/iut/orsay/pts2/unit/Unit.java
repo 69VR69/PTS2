@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
 import java.util.Arrays;
@@ -16,40 +17,25 @@ import fr.iut.orsay.pts2.interfaces.Upgradable;
 import static com.badlogic.gdx.Gdx.graphics;
 import static com.badlogic.gdx.Gdx.input;
 
-public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparable<Unit>, InputProcessor
+public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparable<Unit>
     {
         private String name;
         private float posX = 0, posY = 0;
         private FileHandle texturePath = Gdx.files.internal("data/sheitan-valorant.png");
         private boolean onBoard = true;
         private boolean isMoving = false;
-    
+
         public Unit(String name, float posX, float posY)
             {
+
                 this.name = name;
                 this.posX = posX;
                 this.posY = posY;
                 //System.out.println("ok");
-                Gdx.input.setInputProcessor(this);
+
                 move(5,5);
+
             }
-
-        @Override
-        public boolean keyDown(int keycode) {
-
-
-            return false;
-        }
-
-        @Override
-        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
-            System.out.println("ok");
-
-                move(screenX,screenY);
-
-            return false;
-        }
 
         public Texture texturize()
             {
@@ -83,20 +69,30 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
     
         @Override public boolean move(int xDestination, int yDestination)
             {
+               setMoving(true);
+                System.out.println(this.getPosX() + ""+this.getPosY());
                 int speed = 2;
                 try
                     {
-                        if (xDestination > this.getPosX())
+                        if (xDestination > this.getPosX()) {
                             this.setPosX(this.getPosX() + (int) graphics.getDeltaTime() * speed);
+                            System.out.println("et maintenant " + this.getPosX() + "" + this.getPosY());
+                        }
                         else if (xDestination < this.getPosX())
                             this.setPosX(this.getPosX() - (int) graphics.getDeltaTime() * speed);
                         if (Math.abs(xDestination - this.getPosX()) < Gdx.graphics.getDeltaTime() * speed)
                             {
-                                if (yDestination > this.getPosY())
+                                if (yDestination > this.getPosY()) {
                                     this.setPosY(this.getPosY() + (int) graphics.getDeltaTime() * speed);
-                                else if (yDestination < this.getPosY())
+                                    System.out.println("et maintenant " + this.getPosX() + ""+this.getPosY());
+                                }
+                                else if (yDestination < this.getPosY()) {
                                     this.setPosY(this.getPosY() - (int) graphics.getDeltaTime() * speed);
+                                    System.out.println("et maintenant " + this.getPosX() + ""+this.getPosY());
+
+                                }
                             }
+                        setMoving(false);
                     }
                 catch (Exception e)
                     {
@@ -107,6 +103,7 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
                     {
                         return true;
                     }
+
             }
     
     
