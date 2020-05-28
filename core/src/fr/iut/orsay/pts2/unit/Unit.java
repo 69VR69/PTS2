@@ -61,32 +61,33 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
             
             }
     
-        @Override public boolean move(float xDestination, float yDestination)
-            {
-                setMoving(true);
-                System.out.println(this.getPosX() + "" + this.getPosY());
-                try
-                    {
-                        if (xDestination > this.getPosX())
-                            this.setPosX(this.getPosX() + 1);
-                        else if (xDestination < this.getPosX())
-                            this.setPosX(this.getPosX() - 1);
-    
+        @Override public boolean move(float xDestination, float yDestination) {
+            setMoving(true);
+            float speed = 15;
+            System.out.println(this.getPosX() + "" + this.getPosY());
+            while (xDestination !=this.getPosX()&&yDestination!=this.getPosY()) {
+                try {
+                    if (xDestination > this.getPosX())
+                        this.setPosX(this.getPosX() +  Gdx.graphics.getDeltaTime() * speed);
+                    else if (xDestination < this.getPosX())
+                        this.setPosX(this.getPosX()- Gdx.graphics.getDeltaTime() * speed);
+                    if (Math.abs(xDestination - getPosY()) < Gdx.graphics.getDeltaTime() * speed) {
                         if (yDestination > this.getPosY())
-                            this.setPosY(this.getPosY() + 1);
+                            this.setPosY(this.getPosY() +  Gdx.graphics.getDeltaTime() * speed);
                         else if (yDestination < this.getPosY())
-                            this.setPosY(this.getPosY() - 1);
-                        
+                            this.setPosY(this.getPosY() - Gdx.graphics.getDeltaTime() * speed);
                         setMoving(false);
                         return true;
                     }
-                catch (Exception e)
-                    {
-                        System.err.println("Error:" + Arrays.toString(e.getStackTrace()));
-                        return false;
-                    }
+                } catch (Exception e) {
+                    System.err.println("Error:" + Arrays.toString(e.getStackTrace()));
+                    return false;
+                }
             }
-    
+            return false;
+        }
+
+
     
         @Override public void addForbiddenZone(Object... o)
             {
