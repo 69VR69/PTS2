@@ -10,8 +10,6 @@ import fr.iut.orsay.pts2.interfaces.Fighteable;
 import fr.iut.orsay.pts2.interfaces.Moveable;
 import fr.iut.orsay.pts2.interfaces.Upgradable;
 
-import static com.badlogic.gdx.Gdx.graphics;
-
 public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparable<Unit>
     {
         private String name;
@@ -70,19 +68,15 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
                 try
                     {
                         if (xDestination > this.getPosX())
-                            this.setPosX(this.getPosX() + (int) graphics.getDeltaTime());
+                            this.setPosX(this.getPosX() + 1);
                         else if (xDestination < this.getPosX())
-                            this.setPosX(this.getPosX() - (int) graphics.getDeltaTime());
-                        if (Math.abs(xDestination - this.getPosX()) < Gdx.graphics.getDeltaTime())
-                            if (yDestination > this.getPosY())
-                                {
-                                    this.setPosY(this.getPosY() + (int) graphics.getDeltaTime());
-                                }
-                            else if (yDestination < this.getPosY())
-                                {
-                                    this.setPosY(this.getPosY() - (int) graphics.getDeltaTime());
-                                }
+                            this.setPosX(this.getPosX() - 1);
     
+                        if (yDestination > this.getPosY())
+                            this.setPosY(this.getPosY() + 1);
+                        else if (yDestination < this.getPosY())
+                            this.setPosY(this.getPosY() - 1);
+                        
                         setMoving(false);
                         return true;
                     }

@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PTS2.iml" filepath="$PROJECT_DIR$/PTS2.iml" group="PTS2" />
-      <module fileurl="file://$PROJECT_DIR$/android/PTS2-android.iml" filepath="$PROJECT_DIR$/android/PTS2-android.iml" group="PTS2/android" />
-      <module fileurl="file://$PROJECT_DIR$/core/PTS2-core.iml" filepath="$PROJECT_DIR$/core/PTS2-core.iml" group="PTS2/core" />
-      <module fileurl="file://$PROJECT_DIR$/desktop/PTS2-desktop.iml" filepath="$PROJECT_DIR$/desktop/PTS2-desktop.iml" group="PTS2/desktop" />
-      <module fileurl="file://$PROJECT_DIR$/ios/PTS2-ios.iml" filepath="$PROJECT_DIR$/ios/PTS2-ios.iml" group="PTS2/ios" />
-      <module fileurl="file://$PROJECT_DIR$/PTS2-pts2.iml" filepath="$PROJECT_DIR$/PTS2-pts2.iml" group="pts2" />
-      <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" group="PTS2/android" />
-      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" group="PTS2/core" />
-      <module fileurl="file://$PROJECT_DIR$/desktop/desktop.iml" filepath="$PROJECT_DIR$/desktop/desktop.iml" group="PTS2/desktop" />
-      <module fileurl="file://$PROJECT_DIR$/ios/ios.iml" filepath="$PROJECT_DIR$/ios/ios.iml" group="PTS2/ios" />
+      <module fileurl="file://$PROJECT_DIR$/android/PTS2-android.iml" filepath="$PROJECT_DIR$/android/PTS2-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/PTS2-core.iml" filepath="$PROJECT_DIR$/core/PTS2-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/desktop/PTS2-desktop.iml" filepath="$PROJECT_DIR$/desktop/PTS2-desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ios/PTS2-ios.iml" filepath="$PROJECT_DIR$/ios/PTS2-ios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" group="pts2/android" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" group="pts2/core" />
+      <module fileurl="file://$PROJECT_DIR$/desktop/desktop.iml" filepath="$PROJECT_DIR$/desktop/desktop.iml" group="pts2/desktop" />
+      <module fileurl="file://$PROJECT_DIR$/ios/ios.iml" filepath="$PROJECT_DIR$/ios/ios.iml" group="pts2/ios" />
       <module fileurl="file://$PROJECT_DIR$/massar-PTS2.iml" filepath="$PROJECT_DIR$/massar-PTS2.iml" group="PTS2" />
+      <module fileurl="file://$PROJECT_DIR$/pts2.iml" filepath="$PROJECT_DIR$/pts2.iml" group="pts2" />
     </modules>
   </component>
 </project>

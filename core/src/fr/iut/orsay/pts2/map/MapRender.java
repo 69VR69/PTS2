@@ -2,8 +2,10 @@ package fr.iut.orsay.pts2.map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Timer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,27 +21,26 @@ import fr.iut.orsay.pts2.interfaces.ressource.Cost;
 import fr.iut.orsay.pts2.unit.Archer;
 import fr.iut.orsay.pts2.unit.Unit;
 
-//import fr.iut.orsay.pts2.InputProcessor;
-
 
 public class MapRender extends GameState implements InputProcessor
     {
         
         private HashMap<Object, ArrayList<Cost>> productionList;
-        //private Music music = Gdx.audio.newMusic(Gdx.files.internal(""));
+        private Music music;
+        private Timer timer;
         private Unit unit;
         private SpriteBatch batchUnit;
         private MatrixGenerator mapMatrix;
         private HUD hud;
         private HashMap<Element, Texture> map;
         private SpriteBatch hudBatch;
-        fr.iut.orsay.pts2.InputProcessor ip = new fr.iut.orsay.pts2.InputProcessor();
+        private fr.iut.orsay.pts2.InputProcessor ip = new fr.iut.orsay.pts2.InputProcessor();
         
         
         public MapRender(GameStateManager gsm)
             {
                 super(gsm);
-                
+                this.timer = new Timer();
                 this.hud = new HUD(gsm);
                 this.hudBatch = new SpriteBatch();
                 this.batchUnit = new SpriteBatch();
@@ -51,28 +52,40 @@ public class MapRender extends GameState implements InputProcessor
                 cost.add(new Cost());
                 productionList.put(new Archer("robin", 2, 1), cost);
                 Gdx.input.setInputProcessor(ip);
-                
+                this.setupBackgroundMusic("sound/MenuMusic.mp3");
             }
         
         @Override protected void handleInput()
             {
-                // if () //input j'ai une variable
                 hud.handleInput();
             }
         
         @Override public void update(float dt)
             {
+                music.setOnCompletionListener(new Music.OnCompletionListener()
+                    {
+                        @Override public void onCompletion(final Music music)
+                            {
+                                music.stop();
+                                timer.scheduleTask(new Timer.Task()
+                                    {
+                                        @Override public void run()
+                                            {
+                                                music.play();
+                                            }
+                                    }, 20);
+                            }
+                    });
+                
                 for (Map.Entry<Object, ArrayList<Cost>> ee : this.productionList.entrySet())
                     {
                         Object o = ee.getKey();
                         if (o instanceof Unit)
-                            
-                            if (((Unit) o).isMoving())
-                                {
-                                    
-                                    ((Unit) o).move(0, 3);
-                                }
-                        
+                            {
+                                unit = ((Unit) o);
+                                if (unit.isMoving())
+                                    unit.move(unit.getPosX(), unit.getPosY());
+                            }
                     }
                 hud.update(dt);
             }
@@ -95,93 +108,88 @@ public class MapRender extends GameState implements InputProcessor
                 for (Map.Entry<Object, ArrayList<Cost>> ee : this.productionList.entrySet())
                     {
                         Object o = ee.getKey();
-                        Object e = ee.getKey();
-                        //ArrayList<Cost> cost = ee.getValue();
                         if (o instanceof Unit)
-                            {
-                                if (((Unit) o).isOnBoard())
-                                    {
-                                        unit = (Unit) o;
-                                        float resizeRatio = 0.9f;
-                                        final Texture texture = Tools.resize(unit.texturize(), (int) (CONSTANT.textureWidth * resizeRatio), (int) (CONSTANT.textureHeight * resizeRatio));
-                                        final int deltaWidth = (int) (CONSTANT.textureWidth - CONSTANT.textureWidth * resizeRatio) / 2;
-                                        final int deltaHeight = (int) (CONSTANT.textureHeight - CONSTANT.textureHeight * resizeRatio) / 2;
-                                        batchUnit.draw(texture, (unit.getPosX() * CONSTANT.textureWidth + deltaWidth), (unit.getPosY() * CONSTANT.textureHeight + deltaHeight));
-                                        Gdx.input.setInputProcessor(new InputProcessor()
-                                            {
-                                                @Override public boolean keyDown(int keycode)
-                                                    {
-                                                        return false;
-                                                    }
-                                                
-                                                @Override public boolean keyUp(int keycode)
-                                                    {
-                                                        return false;
-                                                    }
-                                                
-                                                @Override public boolean keyTyped(char character)
-                                                    {
-                                                        return false;
-                                                    }
-                                                
-                                                @Override public boolean touchDown(int screenX, int screenY, int pointer, int button)
-                                                    {
-                                                        float graphicsY = (CONSTANT.screenHeight - screenY);
-                                                        int elementX = 0, elementY = 0;
-                                                        int startX = 0, endX = CONSTANT.textureWidth;
-                                                        int startY = 0, endY = CONSTANT.textureHeight;
-                                                        boolean targetElement = false;
-                                                        
-                                                        while (!targetElement)
-                                                            {
-                                                                
-                                                                
-                                                                if (startX <= screenX && screenX > endX)
-                                                                    {
-                                                                        elementX += 1;
-                                                                        startX += CONSTANT.textureWidth;
-                                                                        endX += CONSTANT.textureWidth;
-                                                                    }
-                                                                if (startY <= graphicsY && graphicsY > endY)
-                                                                    {
-                                                                        elementY += 1;
-                                                                        startY += CONSTANT.textureHeight;
-                                                                        endY += CONSTANT.textureHeight;
-                                                                    }
-                                                                if (screenX >= startX && screenX <= endX && graphicsY >= startY && graphicsY <= endY)
-                                                                    {
-                                                                        targetElement = true;
-                                                                    }
-                                                            }
-                                                        
-                                                        unit.setPosX(elementX);
-                                                        unit.setPosY(elementY);
-                                                        unit.move(unit.getPosX(), unit.getPosY());
-                                                        return true;
-                                                    }
-                                                
-                                                @Override public boolean touchUp(int screenX, int screenY, int pointer, int button)
-                                                    {
-                                                        return false;
-                                                    }
-                                                
-                                                @Override public boolean touchDragged(int screenX, int screenY, int pointer)
-                                                    {
-                                                        return false;
-                                                    }
-                                                
-                                                @Override public boolean mouseMoved(int screenX, int screenY)
-                                                    {
-                                                        return false;
-                                                    }
-                                                
-                                                @Override public boolean scrolled(int amount)
-                                                    {
-                                                        return false;
-                                                    }
-                                            });
-                                    }
-                            }
+                            if (((Unit) o).isOnBoard())
+                                {
+                                    unit = (Unit) o;
+                                    float resizeRatio = 0.9f;
+                                    final Texture texture = Tools.resize(unit.texturize(), (int) (CONSTANT.textureWidth * resizeRatio), (int) (CONSTANT.textureHeight * resizeRatio));
+                                    final int deltaWidth = (int) (CONSTANT.textureWidth - CONSTANT.textureWidth * resizeRatio) / 2;
+                                    final int deltaHeight = (int) (CONSTANT.textureHeight - CONSTANT.textureHeight * resizeRatio) / 2;
+                                    batchUnit.draw(texture, (unit.getPosX() * CONSTANT.textureWidth + deltaWidth), (unit.getPosY() * CONSTANT.textureHeight + deltaHeight));
+                                    Gdx.input.setInputProcessor(new InputProcessor()
+                                        {
+                                            @Override public boolean keyDown(int keycode)
+                                                {
+                                                    return false;
+                                                }
+                    
+                                            @Override public boolean keyUp(int keycode)
+                                                {
+                                                    return false;
+                                                }
+                    
+                                            @Override public boolean keyTyped(char character)
+                                                {
+                                                    return false;
+                                                }
+                    
+                                            @Override public boolean touchDown(int screenX, int screenY, int pointer, int button)
+                                                {
+                                                    float graphicsY = (CONSTANT.screenHeight - screenY);
+                                                    int elementX = 0, elementY = 0;
+                                                    int startX = 0, endX = CONSTANT.textureWidth;
+                                                    int startY = 0, endY = CONSTANT.textureHeight;
+                                                    boolean targetElement = false;
+                            
+                                                    while (!targetElement)
+                                                        {
+                                    
+                                    
+                                                            if (startX <= screenX && screenX > endX)
+                                                                {
+                                                                    elementX += 1;
+                                                                    startX += CONSTANT.textureWidth;
+                                                                    endX += CONSTANT.textureWidth;
+                                                                }
+                                                            if (startY <= graphicsY && graphicsY > endY)
+                                                                {
+                                                                    elementY += 1;
+                                                                    startY += CONSTANT.textureHeight;
+                                                                    endY += CONSTANT.textureHeight;
+                                                                }
+                                                            if (screenX >= startX && screenX <= endX && graphicsY >= startY && graphicsY <= endY)
+                                                                {
+                                                                    targetElement = true;
+                                                                }
+                                                        }
+                            
+                                                    unit.setPosX(elementX);
+                                                    unit.setPosY(elementY);
+                                                    return true;
+                                                }
+                    
+                                            @Override public boolean touchUp(int screenX, int screenY, int pointer, int button)
+                                                {
+                                                    return false;
+                                                }
+                    
+                                            @Override public boolean touchDragged(int screenX, int screenY, int pointer)
+                                                {
+                                                    return false;
+                                                }
+                    
+                                            @Override public boolean mouseMoved(int screenX, int screenY)
+                                                {
+                                                    return false;
+                                                }
+                    
+                                            @Override public boolean scrolled(int amount)
+                                                {
+                                                    return false;
+                                                }
+                                        });
+                                }
                     }
                 
                 
@@ -199,6 +207,7 @@ public class MapRender extends GameState implements InputProcessor
         
         @Override public void dispose()
             {
+                music.dispose();
                 batchUnit.dispose();
                 hud.dispose();
             }
@@ -255,5 +264,13 @@ public class MapRender extends GameState implements InputProcessor
         @Override public boolean scrolled(int amount)
             {
                 return false;
+            }
+    
+        private void setupBackgroundMusic(String musicPath)
+            {
+                music = Gdx.audio.newMusic(Gdx.files.internal(musicPath));
+                //https://github.com/libgdx/libgdx/wiki/Streaming-music
+                music.setVolume(0.2f);
+                music.play();
             }
     }
