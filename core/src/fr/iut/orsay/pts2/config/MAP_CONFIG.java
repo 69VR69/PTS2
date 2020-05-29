@@ -11,14 +11,14 @@ public abstract class MAP_CONFIG
     {
         //Constants
         public final static Random RND = new Random();
-        public final static int WIDTH = 8; //1 2 4 5 8 10 16 20 32 40 80
-        public final static int HEIGHT = 8;
-        public final static int TOLERANCE = 4;
-        private final static int PERCENTGROUND = 70;
+        public final static int WIDTH = 160; //1 2 4 5 8 10 16 20 32 40 80
+        public final static int HEIGHT = 160;
+        public final static int TOLERANCE = 30;
+        private final static int PERCENTGROUND = 40;
         private final static int PERCENTWATER = 10;
-        private final static int PERCENTSAND = 20;
-        private final static int PERCENTFOREST = 20;
-        private final static int PERCENTMOUNTAIN = 20;
+        private final static int PERCENTSAND = 40;
+        private final static int PERCENTFOREST = 40;
+        private final static int PERCENTMOUNTAIN = 40;
         private static Element[] possibleElement = setPossibleElement();
         
         //Methods
