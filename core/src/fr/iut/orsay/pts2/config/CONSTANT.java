@@ -1,6 +1,7 @@
 package fr.iut.orsay.pts2.config;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 
 import java.util.Random;
 
@@ -18,6 +19,7 @@ public abstract class CONSTANT
     
         //Unit
         public final static String WILDLAND = "Wildland";
+        public final static FileHandle unitTexturePath = Gdx.files.internal("texture/Buddhic_Robot.png");
         
         //Civilization
         public final static int NB_RESSOURCES = 3;

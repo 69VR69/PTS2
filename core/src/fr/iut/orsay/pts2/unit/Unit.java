@@ -1,6 +1,5 @@
 package fr.iut.orsay.pts2.unit;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,7 +16,7 @@ public abstract class Unit implements Fighteable, Moveable, Upgradable, Comparab
         private float posX = 0, posY = 0;
         private float xDestination = 0, yDestination = 0;
         private int range = 1;
-        private FileHandle texturePath = Gdx.files.internal("data/sheitan-valorant.png");
+        private FileHandle texturePath = CONSTANT.unitTexturePath;
         private boolean onBoard = true;
         private boolean isMoving = false;
         private SpriteBatch batchUnit;

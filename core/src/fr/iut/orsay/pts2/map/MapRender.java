@@ -40,6 +40,7 @@ public class MapRender extends GameState implements InputProcessor
         public MapRender(GameStateManager gsm)
             {
                 super(gsm);
+                long start = System.currentTimeMillis();
                 this.timer = new Timer();
                 this.hud = new HUD(gsm);
                 this.hudBatch = new SpriteBatch();
@@ -47,6 +48,7 @@ public class MapRender extends GameState implements InputProcessor
                 this.mapMatrix = new MatrixGenerator();
                 this.map = new HashMap<>();
                 this.setupMatrixTexture();
+                System.err.println(System.currentTimeMillis() - start);
                 this.productionList = new HashMap<>();
                 ArrayList<Cost> cost = new ArrayList<>();
                 cost.add(new Cost());

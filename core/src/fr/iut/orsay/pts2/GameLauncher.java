@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 
+import fr.iut.orsay.pts2.config.CONSTANT;
 import fr.iut.orsay.pts2.gameManager.GameStateManager;
 import fr.iut.orsay.pts2.map.MapRender;
 
@@ -27,10 +28,11 @@ public class GameLauncher extends Game
             {
                 this.gsm = new GameStateManager();
                 this.batch = new SpriteBatch();
-    
+        
                 fps = new Label("fps:", new Label.LabelStyle(new BitmapFont(), Color.LIME));
                 fps.setAlignment(Align.topLeft);
-                
+                System.err.println(CONSTANT.screenwidth + "*" + CONSTANT.screenHeight);
+        
                 this.gsm.push(new MapRender(this.gsm));
             }
     
